@@ -1,0 +1,77 @@
+<!doctype html>
+{% load staticfiles %}
+
+    <!-- IMPORTING THE TEMPLATE BASE -->
+    {% include 'header.html' %}
+
+
+    <!--=============== BEGIN #page =================================== -->
+    <div id="page" style="padding-top: 6px">
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 letters">
+            Subir video
+          </div>
+          <div class="col-xs-12 col-sm-4 letters letter-selected">
+            Completar desafío
+          </div>
+          <div class="col-xs-12 col-sm-4 letters border-correction">
+            Material adicional
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <video class="center" width="400" controls>
+              <source src="{% static 'videos/Video04.mp4' %}" type="video/mp4">
+            </video>
+          </div>          
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{error}}
+            </div>
+
+            <form method="POST" role="form" id="register_form" action="/registrar_usuarios/" novalidate>
+            {% csrf_token %}
+              <div class="form-group">
+                <label>Nombre:</label>
+                <input name="first_name" id="first_name" type="text" class="form-control form-control-lg">
+              </div>
+              <div class="form-group">
+                <label>Nombre de usuario:</label>
+                <input name="username" id="username" type="text" class="form-control form-control-lg">
+              </div>                
+              <div class="form-group">
+                <label>Email:</label>
+                <input name="email" id="email" type="email" class="form-control form-control-lg">
+              </div>
+              <div class="form-group">
+                <label>Contraseña:</label>
+                <input name="password" id="password" type="password" class="form-control form-control-lg">
+              </div>
+              <div class="form-group">
+                <label>Seleccione un tipo de usuario:</label>
+                <select name="user_type" id="user_type" class="form-control form-select form-control-lg">
+                  <option value="01">Sordo</option>
+                  <option value="02">Oyente</option>                   
+                </select>
+              </div>
+              <p class="text-center">
+                <button class="btn btn-slide-panel btn-lg btn-block" type="submit"><i class="ti ti-lock"></i> Registrarse</button>
+              </p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!--================== END #page ================================== -->
+
+    {% include 'footer.html' %}
+
+  </body>
+</html>

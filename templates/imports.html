@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<!--[if lte IE 8 ]> <html class="no-js ie8" lang="es"> <![endif]-->
+<!--[if IE 9 ]> <html class="no-js ie9" lang="es"> <![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!-->
+<html class="no-js" lang="es">
+<!--<![endif]-->
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Diccionario Multimedia Indesor</title>
+        
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'font-awesome-4.2.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'signlanguage/styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/logo-font.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/b-different-bw.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/theme-assets.min.css' %}" rel="stylesheet" type="text/css">    
+    <link href="{% static 'switcher/switcher.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+
+    <link href="{% static 'css/tablesorter.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'addons/pager/jquery.tablesorter.pager.css' %}" rel="stylesheet" type="text/css" />
+
+
+    <!-- SCRIPTS IN HEAD ============================================== -->
+    <script src="{% static 'js/modernizr.2.8.3.js'%}"></script>
+        
+    <!--[if lt IE 9]>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery library =============================================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      if (!window.jQuery){
+        document.write('<script src="js/jquery-1.11.1.min.js"><\/script>');
+      }
+    </script>
+
+    <!-- WINDOWS 8 Phones BUG FIX -->
+    <script src="{% static 'js/windows-fix.js'%}"></script>
+  </head>

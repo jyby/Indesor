@@ -1,0 +1,120 @@
+<!doctype html>
+{% load staticfiles %}
+
+    <!-- IMPORTING THE TEMPLATE BASE -->
+    {% include 'header.html' %}
+
+
+    <!--=============== BEGIN #page =================================== -->
+    <div id="page" style="padding-top: 6px">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 letters">
+            <a href="/subir_video/" class="color-white">Subir video</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters">
+            <a href="/subir_definicion/" class="color-white">Subir definición</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters letter-selected border-correction">
+            <a class="color-white">Validar archivos</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 bg-white padding-top-30">
+
+            <table class="tablesorter">
+              <thead>
+                <tr>
+                  <th>Palabra</th>
+                  <th>Votos positivos</th>
+                  <th>Porcentaje votos positivos</th>
+                  <th>Votos negativos</th>
+                  <th>Porcentaje votos negativos</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for word in list_of_words %}
+                <tr class="tableRow" name="{{word.name}}">
+                  <td>{{word.name}}</td>
+                  <td>{{word.positive}}</td>
+                  <td>{{word.positive_percentage}}%</td>
+                  <td>{{word.negative}}</td>
+                  <td>{{word.negative_percentage}}%</td>
+                </tr>
+                {% endfor%}
+              </tbody>
+            </table>
+
+            <div class="pager">
+              Page: <select class="gotoPage"></select>
+              <img src="{% static 'addons/pager/icons/first.png' %}" class="first" alt="First" title="First page" />
+              <img src="{% static 'addons/pager/icons/prev.png' %}" class="prev" alt="Prev" title="Previous page" />
+              <span class="pagedisplay"></span>
+              <img src="{% static 'addons/pager/icons/next.png' %}" class="next" alt="Next" title="Next page" />
+              <img src="{% static 'addons/pager/icons/last.png' %}" class="last" alt="Last" title= "Last page" />
+              <select class="pagesize">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </div>
+          
+          </div>  
+        </div>
+
+      </div>  
+    </div>
+    <!--================== END #page ================================== -->
+
+    {% include 'footer.html' %}
+
+    <script src="{% static 'js/jquery-latest.min.js' %}"></script>  
+    <script src="{% static 'js/jquery.tablesorter.js' %}"></script>  
+    <script src="{% static 'js/jquery.tablesorter.widgets.js' %}"></script>
+    <script src="{% static 'addons/pager/jquery.tablesorter.pager.js' %}"></script>  
+
+    <script id="js">$(function(){
+
+    // define pager options
+    var pagerOptions = {
+      // target the pager markup - see the HTML block below
+      container: $(".pager"),
+      // output string - default is '{page}/{totalPages}'; possible variables: {page}, {totalPages}, {startRow}, {endRow} and {totalRows}
+      output: '{startRow} - {endRow} / {filteredRows} ({totalRows})',
+      // if true, the table will remain the same height no matter how many records are displayed. The space is made up by an empty
+      // table row set to a height to compensate; default is false
+      fixedHeight: true,
+      // remove rows from the table to speed up the sort of large tables.
+      // setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
+      removeRows: false,
+      // go to page selector - select dropdown that sets the current page
+      cssGoto: '.gotoPage'
+    };
+
+    // Initialize tablesorter
+    // ***********************
+    $("table")
+      .tablesorter({
+        theme: 'blue',
+        headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
+        widthFixed: true,
+        widgets: ['zebra', 'filter']
+      })
+
+      // initialize the pager plugin
+      // ****************************
+      .tablesorterPager(pagerOptions);
+
+    });
+
+  $(".tableRow").on("click",function(e){
+    window.location = "/validar_archivo/?palabra="+$(this).attr("name");
+  });
+  
+  </script>    
+
+  </body>
+</html>

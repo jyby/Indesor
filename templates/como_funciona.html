@@ -1,0 +1,44 @@
+<!doctype html>
+{% load staticfiles %}
+
+    <!-- IMPORTING THE TEMPLATE BASE -->
+    {% include 'header.html' %}
+
+
+    <!--=============== BEGIN #page =================================== -->
+    <div id="page" style="padding-top: 6px">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 letters">
+            <a href="/acerca_del_proyecto/" class="color-white">Acerca del Proyecto</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters letter-selected">
+            <a class="color-white">Cómo funciona</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters border-correction">
+            <a href="/configuracion_manual/01" class="color-white">Diccionario Multimedia</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <video id="video1" class="center" width="400" controls>
+              <source src="{% static 'videos/Video02.mp4' %}" type="video/mp4">
+            </video>        
+          </div>          
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <p>Cada usuario tiene un puntaje llamado crédito que le sirve para desbloquear palabras del diccionario. Cuando se queda sin crédito suficiente para acceder a más contenido, debe adquirir más de éste completando un desafío o subiendo material al sitio, ya sea un video de una seña en el caso de que el usuario sea sordo o la definición de una palabra en el caso del oyente.</p>
+            <p>La validación del material que suben los usuarios se realiza a través de estos desafíos. Los expertos del INDESOR serán los encargados de aceptar las palabras agregadas por los usuarios, una vez que éstos con sus respuestas señalen qué trío palabra-video-definición es válido de añadir al diccionario.
+            </p>
+          </div>        
+        </div>
+
+      </div>  
+    </div>
+    <!--================== END #page ================================== -->
+
+    {% include 'footer.html' %}
+
+  </body>
+</html>

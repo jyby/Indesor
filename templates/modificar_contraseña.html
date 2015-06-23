@@ -1,0 +1,60 @@
+<!doctype html>
+{% load staticfiles %}
+
+    <!-- IMPORTING THE TEMPLATE BASE -->
+    {% include 'header.html' %}
+
+
+    <!--=============== BEGIN #page =================================== -->
+    <div id="page" style="padding-top: 6px">
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 letters">
+            Subir definición
+          </div>
+          <div class="col-xs-12 col-sm-4 letters">
+            Completar desafío
+          </div>
+          <div class="col-xs-12 col-sm-4 letters letter-selected border-correction">
+            Modificar contraseña
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <video class="center" width="400" controls>
+              <source src="videos/muchas_gracias.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <form role="form" action="/subir_video/" method="POST" enctype="multipart/form-data">            
+              <div class="form-group">
+                <label>Contraseña actual:</label>
+                  <input type="password" id="password" name="password" class="form-control form-control-lg">
+              </div>
+              <div class="form-group">
+                <label>Nueva contraseña:</label>
+                  <input type="password" id="new_password" name="new_password" class="form-control form-control-lg">
+              </div>
+              <div class="form-group">
+                <label>Repetir nueva contraseña:</label>
+                  <input type="password" id="new_password_repetition" name="new_password_repetition" class="form-control form-control-lg">
+              </div>
+              <p class="text-center">
+                <button class="btn btn-slide-panel btn-lg btn-block" type="submit"><i class="ti ti-check"></i> Aceptar</button>
+              </p>
+            </form>
+          </div>       
+        </div>
+
+      </div>
+
+  </div>
+    <!--================== END #page ================================== -->
+
+    {% include 'footer.html' %}
+
+  </body>
+</html>

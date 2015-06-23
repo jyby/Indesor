@@ -1,0 +1,75 @@
+<!doctype html>
+{% load staticfiles %}
+
+    <!-- IMPORTING THE TEMPLATE BASE -->
+    {% include 'header.html' %}
+
+
+    <!--=============== BEGIN #page =================================== -->
+    <div id="page" style="padding-top: 6px">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 letters letter-selected">
+            <a class="color-white">Subir definición</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters">
+            <a href="/desafio/" class="color-white">Completar desafío</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters border-correction">
+            <a class="color-white">Material Adicional</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <video id="video1" class="center" width="400" controls>
+              <source src="{% static 'videos/muchas_gracias.mp4' %}" type="video/mp4">
+            </video>        
+          </div>          
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+
+            {% if status == "ok" %}
+              <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  {{result}}
+              </div>
+            {% elif status == "error" %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  {{result}}
+              </div>
+            {% endif %}
+
+            <form role="form" action="/subir_definicion/" method="POST">
+            {% csrf_token %}
+
+              <div class="form-group">
+                <p><b>Palabra:</b></p>
+                  <select name="word" id="word" class="form-control form-select">
+                  {% for word in list_of_words %}
+                    <option>{{word}}</option>
+                  {%  endfor %}
+                  </select>
+              </div>
+
+               <div class="form-group">
+                <p><b>Definición:</b></p>
+                <textarea name="definition" id="definition" class="form-control form-control-lg" rows="4"></textarea>
+                <p class="help-block">Se sugiere que la definición provenga del diccionario de la RAE.</p>
+              </div>        
+              <p class="text-center">
+                <button class="btn btn-slide-panel btn-lg btn-block" type="submit"><i class="ti ti-upload"></i> Subir Definición</button>
+              </p>
+            </form>
+          </div>        
+        </div>
+
+      </div>  
+    </div>
+    <!--================== END #page ================================== -->
+
+    {% include 'footer.html' %}
+
+  </body>
+</html>

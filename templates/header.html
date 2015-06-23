@@ -1,0 +1,351 @@
+  {% include 'imports.html' %}
+  {% load staticfiles %}
+
+  <body>
+
+  <!-- No Script Fallback notice -->
+  <noscript>
+    <div>
+      Turn on your JavaScript!
+    </div>
+  </noscript>
+
+<!--=============== HEADER ======================================== -->
+    <header class="header">
+      <div class="header-inner">
+      <!-- info : .header-inner acts like container --> 
+
+        <div class="logo-brand">
+          <a href="index.html">
+            <span class="logo-brand-inner">
+              <span class="logo"><a href="/acerca_del_proyecto/"><img id="logo" src="{% static 'img/logo.png' %}" style="height:100px" alt="Indesor"></a>
+              </span>  
+              <span class="logo"><a href="/acerca_del_proyecto/"><img id="logo" src="{% static 'img/logo-up-es.png' %}" style="height:100px" alt="Indesor"></a>
+              </span>                           
+            </span>
+          </a>
+        </div>
+      <!-- /.logo-brand-->
+
+        <div class="header-btn-bar">
+        <!-- .menu-toggle --> 
+          <a href="#" class="menu-toggle" data-slide="slide" data-target="#navigation-panel"> 
+            <div class="menu-toggle-inner">
+              <span class="veggieburger">
+                <span class="lines">
+                </span>
+              </span>
+              <!--/.veggieburger-->
+              <span class="menu-toggle-text">
+                MENÚ
+              </span>
+            </div>
+          </a>
+          <!-- /.menu-toggle-->
+
+        {% if request.session.username %}
+          <div class="header-btn-wrapper">
+          <!-- .header-btn-row-->
+            <div class="header-btn-row ">
+              <a href="#" class="loged-in login-toggle header-btn header-btn-xl" data-slide="slide" data-target="#logout-panel"> <i class="fa fa-user header-icon"></i>
+                <span class="header-btn-text">
+                  {{request.session.username}}
+                </span>
+                </br>
+                <span class="header-btn-text">
+                  <span id="credit_span">{{request.session.credit}}</span>                
+                  <i class="fa fa-thumbs-up header-icon"></i> 
+                </span>                
+              </a>
+            </div>
+          </div>
+
+        {% else %}
+          <div class="header-btn-wrapper clearfix">
+          <!-- .header-btn-row-->
+            <div class="header-btn-row half-row">
+              <a href="#" class="login-toggle header-btn header-btn-xl" data-slide="slide" data-target="#login-panel"> <i class="fa fa-sign-in header-icon"></i>
+                <span class="header-btn-text">
+                  Iniciar Sesión
+                </span>
+              </a>
+            </div>
+            <div class="header-btn-row half-row">  
+              <a href="#" class="signin-toggle header-btn header-btn-xl" data-slide="slide" data-target="#signup-panel"> <i class="fa fa-pencil header-icon"></i>
+                <span class="header-btn-text">
+                  Registrarse
+                </span>
+              </a>
+            </div>
+          </div>
+          {% endif %}
+
+        </div>
+
+      </div>
+    </header>
+    <!--=============== END HEADER ==================================== --> 
+
+
+    <!--=============== BEGIN SLIDE OUT PANELS  ======================= -->
+    <div class="slide-panel-parent">
+
+      <!-- NAVIGATION PANEL -->
+      <div class="slide-panel" id="navigation-panel">
+        <a href="#" class="close ti ti-close">
+          <!--themify icon font-->
+        </a>
+      
+        <div class="container">
+          <h2 class="slide-panel-title">Menú</h2>
+          <div class="row">
+
+            <div class="col-md-6">
+              <video id="video1" class="center" width="400" controls>
+                <source src="{% static 'videos/Video06.mp4' %}" type="video/mp4">
+              </video>
+              <video id="video2" class="center" width="400" controls>
+                <source src="{% static 'videos/Video07.mp4' %}" type="video/mp4">
+              </video>
+              <video id="video3" class="center" width="400" controls>
+                <source src="{% static 'videos/Video08.mp4' %}" type="video/mp4">
+              </video>
+
+              <script>
+              $('#video2').hide();
+              $('#video3').hide();
+              </script>
+
+            </div>
+
+            <div class="col-md-3">
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#" onclick="$('#video1').show(); $(video2).hide(); $(video3).hide();"><b>Acerca del Proyecto</b></a>
+                  <a href="/acerca_del_proyecto/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                </li>
+                <li>
+                  <a href="#" onclick="$('#video2').show(); $(video1).hide(); $(video3).hide();"><b>Cómo funciona</b></a>
+                  <a href="/como_funciona/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                </li>
+                <li>
+                  <a href="#" onclick="$('#video2').hide(); $(video1).hide(); $(video3).show();"><b>Diccionario Multimedia</b></a>
+                  <a href="/configuracion_manual/01" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-md-3">
+              <ul class="list-unstyled">     
+                <li>
+                  <a href="#"><b>Subir video</b></a>
+                  <a href="/subir_video/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                </li>
+                <li>
+                  <a href="#"><b>Subir definición</b></a>
+                  <a href="/subir_definicion/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                </li>
+                <li>
+                  <a href="#"><b>Validar archivos</b></a>
+                  <a href="/listado_archivos/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                </li>
+                <li>
+                  <a href="#"><b>Completar Desafío</b></a>
+                  <a href="/desafio/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container -->
+      </div>
+      <!--/.container inside #navigation-panel -->
+
+
+      <!-- LOGIN PANEL #login-panel -->
+      <div class="slide-panel" id="login-panel">
+        <a href="#" class="close ti ti-close"> 
+          <!--themify icon font--> 
+        </a>
+
+        <div class="container">
+          <h2 class="slide-panel-title">Iniciar Sesión</h2>
+          <div class="row">
+
+            <div class="col-md-6">
+              <p></p>
+              <video class="center" width="400" controls>
+                <source src="{% static 'videos/Video04.mp4' %}" type="video/mp4">
+              </video>
+            </div>
+
+            <div class="col-md-6">
+              <p></p>
+              <form role="form" id="login_form" action="/iniciar_sesion/" method="POST">
+              {% csrf_token %}
+                <div class="form-group">
+                  <label>Nombre de usuario:</label>
+                  <input type="text" name="username" class="form-control form-control-lg">
+                </div>
+                <div class="form-group">
+                  <label>Contraseña:</label>
+                  <input type="password" name="password" class="form-control form-control-lg">
+                </div>
+
+                <p class="text-center">
+                  <button class="btn btn-slide-panel btn-lg btn-block" type="submit"><i class="ti ti-lock"></i> Iniciar Sesión</button>
+                </p>
+              </form>
+              <p class="text-center clear"><a href="#" data-slide="slide" data-target="#forgot-password-panel" class="link-underline">Olvidó su contraseña?</a> <br>
+              Aún no tiene una cuenta? <a class="link-underline signin-toggle" href="#" data-slide="slide" data-target="#signup-panel">Registrarse</a> </p>
+            </div>
+
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container -->
+      </div>
+      <!--/.slide-panel #login-panel -->
+
+
+      <!-- LOGOUT PANEL #logout-panel -->
+      <div class="slide-panel" id="logout-panel">
+        <a href="#" class="close ti ti-close"> 
+          <!--themify icon font--> 
+        </a>
+
+        <div class="container">
+          <h2 class="slide-panel-title">Perfil de Usuario</h2>
+          <div class="row">
+
+            <div class="col-md-6">
+              <h4 class="no-margin-top">Video</h4>
+            </div>
+
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li>{{request.session.credit}} <i class="fa fa-thumbs-up header-icon"></i> 
+                </li>
+                <li>
+                  <a href="#">Modificar contraseña</a>
+                  <a href="/modificar_contrasena/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                </li>
+              </ul>
+              <p class="text-center">
+                <a href="/cerrar_sesion/"><button class="btn btn-slide-panel btn-lg btn-block"><i class="fa fa-sign-out"></i> Cerrar Sesión</button></a>
+              </p>
+            </div>
+
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container -->
+      </div>
+      <!--/.slide-panel #logout-panel -->
+
+
+      <!-- SIGNUP PANEL #signup-panel -->
+      <div class="slide-panel" id="signup-panel">
+        <a href="#" class="close ti ti-close"> 
+          <!--themify icon font--> 
+        </a>
+        
+        <div class="container">
+          <h2 class="slide-panel-title">Registrarse</h2>
+          <div class="row">
+            
+            <div class="col-md-6">
+              <p></p>
+              <video class="center" width="400" controls>
+                <source src="{% static 'videos/Video03.mp4' %}" type="video/mp4">
+              </video>
+            </div>
+
+            <div class="col-md-6">
+              <p></p>
+              <form method="POST" role="form" id="register_form" action="/registrar_usuarios/" novalidate>
+              {% csrf_token %}
+                <div class="form-group">
+                  <label>Nombre:</label>
+                  <input name="first_name" id="first_name" type="text" class="form-control form-control-lg">
+                </div>
+                <div class="form-group">
+                  <label>Nombre de usuario:</label>
+                  <input name="username" id="username" type="text" class="form-control form-control-lg">
+                </div>                
+                <div class="form-group">
+                  <label>Email:</label>
+                  <input name="email" id="email" type="email" class="form-control form-control-lg">
+                </div>
+                <div class="form-group">
+                  <label>Contraseña:</label>
+                  <input name="password" id="password" type="password" class="form-control form-control-lg">
+                </div>
+                <div class="form-group">
+                  <label>Seleccione un tipo de usuario:</label>
+                  <select name="user_type" id="user_type" class="form-control form-select form-control-lg">
+                    <option value="01">Sordo</option>
+                    <option value="02">Oyente</option>                   
+                  </select>
+                </div>
+                <p class="text-center">
+                  <button class="btn btn-slide-panel btn-lg btn-block" type="submit"><i class="ti ti-lock"></i> Registrarse</button>
+                </p>
+              </form>
+              <p class="text-center clear">Ya tiene una cuenta? <a class="link-underline login-toggle" href="#" data-slide="slide" data-target="#login-panel">Iniciar Sesión</a></p>
+            </div>
+
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container -->
+      </div>
+      <!--/.slide-panel #signup-panel -->
+
+
+      <!-- FORGOT PASSWORD #forgot-password-panel  -->
+      <div class="slide-panel" id="forgot-password-panel">
+        <a href="#" class="close ti ti-close"> 
+          <!--themify icon font--> 
+        </a>
+
+        <div class="container">
+          <h2 class="slide-panel-title">Restaurar Contraseña</h2>
+          <div class="row">
+
+            <div class="col-md-6">
+              <p></p>
+              <video class="center" width="400" controls>
+                <source src="{% static 'videos/Video05.mp4' %}" type="video/mp4">
+              </video>
+            </div>
+
+            <div class="col-sm-6">
+              <p></p>
+              <form role="form" id="recover_password_form" action="/recuperar_contrasena/">
+                <div class="form-group">
+                  <label>Ingrese su email:</label>
+                  <input name="email" id="email" type="email" class="form-control form-control-lg">
+                </div>
+                <p class="text-center">
+                  <button class="btn btn-slide-panel btn-lg btn-block" type="submit"><i class="ti ti-lock"></i> Enviar email</button>
+                </p>
+              </form>
+          
+              <hr class="vertical-spacer height-20px">
+              <p class="text-center"><a href="#" data-slide="slide" data-target="#login-panel" class="link-underline login-toggle">Ya tiene su contraseña?</a></p>
+            </div>
+
+          </div>
+          <!-- /.row -->    
+        </div>
+        <!-- /.container -->
+      </div>
+      <!--/.slide-panel #forgot-password-panel -->
+
+    </div>
+    <!-- END .slide-down-parent --> 
+
+    <!--================== END SLIDE OUT PANELS  ====================== -->

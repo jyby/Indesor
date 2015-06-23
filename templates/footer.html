@@ -1,0 +1,125 @@
+ {% load staticfiles %}
+ {% include 'imports.html' %}
+
+<!-- ================== FOOTER ==================================== -->
+    <footer class="footer">
+      <!--/.footer-column-wrapper -->
+      <div class="footer-copyright">
+        <div class="container">
+          <p class="no-margin">© Indesor 2015</p>
+        </div>
+      </div>
+      <!--/.footer-copyright--> 
+    </footer>
+<!--=============== END FOOTER ==================================== -->
+
+    <script src="{% static 'js/jquery.touch-swipe.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/jquery.bootstrap.addon.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'js/jquery.slick-slider.min.js' %}"></script>
+    <script src="{% static 'js/jquery.isotope.masonry.js' %}"></script>
+    <script src="{% static 'switcher/switcher.js' %}"></script> 
+    <script src="{% static 'js/jquery.main.js' %}"></script>     
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+
+    <script type="text/javascript">
+    $("#login_form").validate({
+      rules: {
+        username: {
+          required: true
+        },
+
+        password: {
+          required: true
+        } 
+
+      },
+
+      messages: {
+        username: {
+          required: 'Debe ingresar un nombre de usuario'
+        },
+
+        password: {
+          required: 'Debe ingresar una contraseña'
+        }
+
+      },
+
+      errorPlacement: function(error, element){
+        error.insertAfter(element.parent());
+      }
+
+    });
+
+    $("#register_form").validate({
+      rules: {
+        first_name: {
+          required: true
+        },
+
+        username: {
+          required: true
+        },
+
+        email: {
+          required: true,
+          email: true
+
+        },
+
+        password: {
+          required: true
+        } 
+
+      },
+
+      messages: {
+        first_name: {
+          required: 'Debe ingresar un nombre'
+        },
+
+        username: {
+          required: 'Debe ingresar un nombre de usuario'
+        },
+
+         email: {
+          required: 'Debe ingresar un email',
+          email: 'Ingrese un email válido'
+
+        },
+
+        password: {
+          required: 'Debe ingresar una contraseña'
+        }
+
+      },
+
+      errorPlacement: function(error, element){
+        error.insertAfter(element.parent());
+      }
+
+    });
+
+    $("#recover_password_form").validate({
+      rules: {
+        email: {
+          required: true,
+          email: true
+        }
+      },
+
+      messages: {
+         email: {
+          required: 'Debe ingresar un email',
+          email: 'Ingrese un email válido'
+        }
+      },
+
+      errorPlacement: function(error, element){
+        error.insertAfter(element.parent());
+      }
+
+    });
+    </script>    

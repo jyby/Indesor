@@ -1,0 +1,175 @@
+<!doctype html>
+{% load staticfiles %}
+
+    <!-- IMPORTING THE TEMPLATE BASE -->
+    {% include 'header.html' %}
+
+
+    <!--=============== BEGIN #page =================================== -->
+    <div id="page" style="padding-top: 6px">
+
+      <div class="container">
+
+        <div class="row block-letters">
+
+          <div class="col-xs-1 bg-orange letters letters-big big">
+            <div class="big icon icon-{{icon_code}}"></div>
+          </div>
+
+          <div class="col-xs-11">
+            <div class="row">
+
+              {% for number,icon in manual_config_pair_array%}
+              <div class="letters
+              {% ifequal number manual_configuration %}
+                letter-selected
+              {% endifequal %}
+              col-xs-17">
+                <a href="/configuracion_manual/{{number}}"
+                class="color-white"><span class="icon icon-{{icon}}"></span></a>
+              </div>
+              {% endfor %}
+                         
+            </div>
+          </div>
+      
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 bg-green switch">
+            <a href="/orden_alfabetico/A">Cambiar a Orden Alfabético</a>
+          </div> 
+        </div>
+
+      </div>
+
+      <div class="container" style="padding-top: 5px">
+        <div class="row">
+          <div class="col-xs-12" style="padding: 0px">
+
+            <aside class="widget">
+              <h5 class="widget-title"><span>Buscar</span></h5>
+              <form class="searchform" method="GET" action="/configuracion_manual/{{manual_configuration}}/">
+              {% csrf_token %}
+                <div class="form-group">
+                  <input class="form-control" name="buscar" type="text" placeholder="Escriba una palabra y presione Enter">
+                </div>
+              </form>
+            </aside>
+
+            {% if list_of_words %}
+            <div class="tabs-left">
+        
+              <!--begin tabs going in wide content -->
+              <ul class="words nav nav-tabs content-tabs content-tabcollapse-visible-xl" id="tab-example-1" role="tablist">
+
+                {% if words.has_previous %}
+                <div class="scroll">
+                <a href="?pagina={{words.previous_page_number}}"><span class="color-green glyphicon glyphicon-chevron-up"></span></a>
+                </div>
+                {% else %}
+                <div class="scroll">
+                <span class="color-grey glyphicon glyphicon-chevron-up"></span>
+                </div>
+                {% endif %}
+
+                {% for word in words %}
+                    <li class="
+                    {% if forloop.first %}
+                      active 
+                    {% endif %}
+                    scroll-tabs"><a class="clase_ajax" role="tab" data-toggle="tab">{{ word.name }}</a></li>
+                {% endfor %}
+
+                {% if words.has_next %}
+                <div class="scroll">
+                <a href="?pagina={{words.next_page_number}}"><span class="color-green glyphicon glyphicon-chevron-down"></span></a>
+                </div>
+                {% else %}
+                <div class="scroll">
+                <span class="color-grey glyphicon glyphicon-chevron-down"></span>
+                </div>                
+                {% endif %}
+
+              </ul><div class="panel-group content-tabcollapse-hidden-xl" id="tab-example-1-accordion"></div>
+
+
+              <!--/.nav-tabs.content-tabs -->
+              <div class="tab-content content-tabcollapse-visible-xl">
+
+                {% for word in list_of_words %}
+                  <div class="
+                  {% if forloop.first %}
+                    active            
+                  {% endif %}
+                  tab-pane" id="{{word.name}}">
+                  <div class="pane-content clearfix">
+
+                    {%for video in word.files%}
+                    <video class="center margin-top-10" width="400" controls>
+                      <source src="{{video}}" type="video/mp4">
+                    </video>
+                    {% endfor %}
+
+                    <p class="definition"><b>{{word.name}}: </b>{{word.definition}}</p>
+
+                  </div>
+                  <!--/.pane-content -->
+                </div>
+                <!--/.tab-pane -->
+                {% endfor %}
+                <div class="tab-pane" id="no-credit">
+                  <div class="pane-content clearfix">
+                      No tiene credito, haga algo
+
+                  </div>
+                </div>
+
+              </div>
+              <!--/.tab-content -->
+
+            </div>
+            {% endif %}
+
+          </div>       
+          <!--/.col-xs-12 -->
+        </div>
+        <!--/.row -->
+    </div>
+    
+    <!--================== END #page ================================== -->
+
+    {% include 'footer.html' %}
+
+    <script type="text/javascript">
+      $(".clase_ajax").on("click",function(e){
+        //e.preventDefault();
+        word = $(this).html();
+
+        $.ajax({
+          url: "/pagar_por_palabra/",
+          data: {"word" : word},
+          method: "GET",
+          success: function(data){
+            $(".tab-pane").removeClass("active");
+            if(data.status == "ok"){
+              $("#"+word).addClass("active");
+              $("#credit_span").html(data.credit);
+            }
+            else{
+              $("#no-credit").addClass("active");
+            }
+          }
+        });
+
+      });
+
+    $("#flechas").on("click",function(e){
+            e.preventDefault();
+            window.location = $(this).attr('href');
+          });
+
+
+    </script>
+  </body>
+</html>

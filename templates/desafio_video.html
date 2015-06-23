@@ -1,0 +1,125 @@
+<!doctype html>
+{% load staticfiles %}
+
+    <!-- IMPORTING THE TEMPLATE BASE -->
+    {% include 'header.html' %}
+
+
+    <!--=============== BEGIN #page =================================== -->
+    <div id="page" style="padding-top: 6px">
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 letters">
+            Subir Video
+          </div>
+          <div class="col-xs-12 col-sm-4 letters letter-selected">
+            Completar desafío
+          </div>
+          <div class="col-xs-12 col-sm-4 letters border-correction">
+            Material adicional
+          </div>
+        </div>
+
+        <div class="row" id="first_question">
+          <form role="form" action="/resultado/" method="post">
+           {% csrf_token %}
+				  <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <video class="center" width="400" controls>
+            	<source src="{{challenge.correct_word.video}}" type="video/mp4">
+            </video>
+				  </div>
+		      <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+		      	<p>¿Qué palabra representa la seña del video?</p>
+
+
+              <input type="hidden" name="id_known" value="{{challenge.correct_word.id}}">
+              {% if number == 0 %}
+                {% for word in challenge.correct_word.options %}
+  					    <div class="radio">
+                  {% if forloop.first %}
+                    <label><input type="radio" name="option_known" value="{{word}}" checked="checked">{{word}}</label>
+                  {% else %}
+                    <label><input type="radio" name="option_known" value="{{word}}">{{word}}</label>                
+                  {% endif %}
+  					    </div>
+                {% endfor %}
+              {% else %}
+                {% for word in challenge.unknown_word.options %}
+                <div class="radio">
+                  {% if forloop.first %}
+                    <label><input type="radio" name="option_unknown" value="{{word}}" checked="checked">{{word}}</label>
+                  {% else %}
+                    <label><input type="radio" name="option_unknown" value="{{word}}">{{word}}</label>
+                  {% endif %}                  
+                </div>
+                {% endfor %}
+              {% endif %}             
+
+            <button class="btn btn-slide-panel btn-lg btn-block" style="margin-bottom: 30px">Siguiente</button>
+
+		      </div>       
+	      </div>
+        <div class="row" id="second_question" style="display:none;">
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <video class="center" width="400" controls>
+              <source src="{{challenge.unknown_word.video}}" type="video/mp4">
+            </video>
+          </div>
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <p>¿Qué palabra representa la seña del video?</p>
+
+              <input type="hidden" name="id_unknown" value="{{challenge.unknown_word.id}}">
+              {% if number == 0 %}
+                {% for word in challenge.unknown_word.options %}
+                <div class="radio">
+                  {% if forloop.first %}
+                    <label><input type="radio" name="option_unknown" value="{{word}}" checked="checked">{{word}}</label>
+                  {% else %}
+                    <label><input type="radio" name="option_unknown" value="{{word}}">{{word}}</label>
+                  {% endif %}                  
+                </div>
+                {% endfor %}
+              {% else %}
+                {% for word in challenge.correct_word.options %}
+                <div class="radio">
+                  {% if forloop.first %}
+                    <label><input type="radio" name="option_known" value="{{word}}" checked="checked">{{word}}</label>
+                  {% else %}
+                    <label><input type="radio" name="option_known" value="{{word}}">{{word}}</label>                
+                  {% endif %}
+                </div>
+                {% endfor %}
+              {% endif %}
+              <button class="btn btn-slide-panel btn-lg btn-block" style="margin-bottom: 30px">Enviar</button>
+
+
+            
+            </form>
+
+          </div>       
+        </div>  
+
+
+      
+
+      </div>
+
+	</div>
+    <!--================== END #page ================================== -->
+
+    {% include 'footer.html' %}
+
+    <script type="text/javascript">
+
+    $("#first_question button").on("click",function(e){
+      e.preventDefault();
+      $("#second_question").css("display","");
+      $("#first_question").css("display","none");
+
+    });
+    </script>
+    
+  </body>
+</html>

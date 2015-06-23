@@ -1,0 +1,74 @@
+<!doctype html>
+{% load staticfiles %}
+
+    <!-- IMPORTING THE TEMPLATE BASE -->
+    {% include 'header.html' %}
+
+
+    <!--=============== BEGIN #page =================================== -->
+    <div id="page" style="padding-top: 6px">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 letters letter-selected">
+            <a class="color-white">Subir video</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters">
+            <a href="/desafio/" class="color-white">Completar desafío</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters border-correction">
+            <a class="color-white">Material Adicional</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+            <video id="video1" class="center" width="400" controls>
+              <source src="{% static 'videos/muchas_gracias.mp4' %}" type="video/mp4">
+            </video>        
+          </div>
+          <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+
+            <form role="form" action="/subir_video_palabra_existente/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+              {% if status == "ok" %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{result}}
+                </div>
+              {% elif status == "error" %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{result}}
+                </div>
+              {% endif %}          
+
+              <div class="form-group">
+                <label>Palabra:</label>
+                <select name="word" id="word" class="form-control form-select">
+                {% for word in list_of_words %}
+                  <option>{{word}}</option>
+                {%  endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="file" name="video" id="video">
+                <p class="help-block">El tamaño del video no puede superar 3 Mb.</p>
+              </div>        
+              <p class="text-center">
+                <button class="btn btn-slide-panel btn-lg btn-block" type="submit"><i class="ti ti-upload"></i> Subir Video</button>
+              </p>
+            </form>
+
+          </div>    
+        </div>
+
+      </div>  
+    </div>
+    <!--================== END #page ================================== -->
+
+    {% include 'footer.html' %}
+
+  </body>
+</html>

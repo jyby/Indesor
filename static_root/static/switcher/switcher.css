@@ -1,0 +1,29 @@
+/* ========================================================================
+* Christina Arasmo Beymer : works with switcher.js
+* http://websitetemplatesthatrock.com
+* ========================================================================
+* Copyright 2015 Christina Arasmo Beymer 
+* ======================================================================== */
+.ie8 #switcher-wrapper{display:none !important}#switcher-wrapper,#switcher-wrapper h3,#switcher-wrapper a{color:#000;font-family:"Courier New",Courier,"Lucida Sans Typewriter","Lucida Typewriter",monospace !important}#switcher-wrapper h3{margin:0 0 10px 0;font-size:18px;text-transform:uppercase;color:#fff}#switcher-wrapper h3 span{background:#000}#switcher-wrapper .close{color:#000;opacity:1;float:right;padding:20px 20px 0 0;font-size:30px}#switcher-wrapper .close:hover{opacity:.5}#switcher-wrapper .button{padding:8px 10px 5px;background:#000;color:#fff;border:1px solid #000;font-size:14px;line-height:1;text-decoration:none}#switcher-wrapper a.button:hover,#switcher-wrapper a.button:focus,#switcher-wrapper a.button:active{color:#fff;text-decoration:none;background:#333}#switcher-wrapper section{clear:both;margin:0 auto;max-width:1150px;width:100%;padding:10px 15px}#switcher-wrapper .colors{margin-bottom:10px;position:relative}#switcher-wrapper .colors a{float:left;display:block;width:80px;height:40px;margin:0 1% 5px 0;position:relative;border:1px solid #777}#switcher-wrapper .colors a.active{border-style:dashed;border-width:3px}#switcher-wrapper .colors a span{display:block;height:100%;width:50%;position:absolute;top:0;left:0}#switcher-wrapper .colors a span:last-child{left:50%}#switcher-wrapper #base span:first-child{background:#fff;border-right:15px solid #000}#switcher-wrapper #base span:last-child{background:#eee;border-left:15px solid #000}#switcher-wrapper #b-different-stone span:first-child{background:#f7f6ef;border-right:15px solid #ebe7d6}#switcher-wrapper #b-different-stone span:last-child{background:#4b3f38;border-left:15px solid #ebe7d6}#switcher-wrapper #b-different-white span:first-child{background:#fff;border-right:15px solid #ddd}#switcher-wrapper #b-different-white span:last-child{background:#777;border-left:15px solid #ddd}#switcher-wrapper #b-different-blue-gray span:first-child{background:#333;border-right:15px solid #3fa7d2}#switcher-wrapper #b-different-blue-gray span:last-child{background:#f6f5f2;border-left:15px solid #3fa7d2}#switcher-wrapper #b-different-red-black span:first-child{background:#000;border-right:15px solid #9b1f02}#switcher-wrapper #b-different-red-black span:last-child{background:#eee;border-left:15px solid #9b1f02}#switcher-wrapper #b-different-salmon-blue span:first-child{background:#e4e5e8;border-right:15px solid #3c4663}#switcher-wrapper #b-different-salmon-blue span:last-child{background:#f36757;border-left:15px solid #3c4663}#switcher-wrapper #b-different-retro span:first-child{background:#abe3ed;border-right:15px solid #433125}#switcher-wrapper #b-different-retro span:last-child{background:#ede9d0;border-left:15px solid #433125}#switcher-wrapper #b-different-navy-taupe span:first-child{background:#e7e1d9;border-right:15px solid #51483b}#switcher-wrapper #b-different-navy-taupe span:last-child{background:#4f5472;border-left:15px solid #51483b}#switcher-wrapper #b-different-green-gray span:first-child{background:#333;border-right:15px solid #aecd44}#switcher-wrapper #b-different-green-gray span:last-child{background:#f6f5f2;border-left:15px solid #aecd44}#switcher-wrapper #b-different-navy span:first-child{background:#25345f;border-right:15px solid #fff}#switcher-wrapper #b-different-navy span:last-child{background:#f7f7f7;border-left:15px solid #fff}#switcher-wrapper{position:fixed;background:#fff url(lined_paper.jpg);width:100%;left:-100%;top:0;opacity:0;z-index:2000;border:3px solid #000;overflow:auto;transition:all .5s ease-in-out}.open-switcher #switcher-wrapper{top:0;bottom:0;left:0;opacity:1;transition:all .5s ease-in-out}.open-switcher .theme-switcher-toggle i:before{content:"\f00d"}@media(min-width:768px){#switcher-wrapper,.open-switcher #switcher-wrapper{top:103px}#switcher-wrapper .viewport-tester{font-size:20px}#switcher-wrapper .colors a{width:19%;height:80px}}
+.open-switcher .body-scroll-fix {position: fixed;top: 0;left: 0;right: 0;bottom: 0;overflow-y: scroll;}
+
+.touch .header .fa-spin { /*CSS transitions*/
+ -o-transition-property: none !important;
+ -moz-transition-property: none !important;
+ -ms-transition-property: none !important;
+ -webkit-transition-property: none !important;
+ transition-property: none !important;
+ /*CSS transforms*/
+ -o-transform: none !important;
+ -moz-transform: none !important;
+ -ms-transform: none !important;
+ -webkit-transform: none !important;
+ transform: none !important;
+ /*CSS animations*/
+ -webkit-animation: none !important;
+ -moz-animation: none !important;
+ -o-animation: none !important;
+ -ms-animation: none !important;
+ animation: none !important;
+
+}

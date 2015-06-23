@@ -1,0 +1,74 @@
+<!doctype html>
+{% load staticfiles %}
+
+    <!-- IMPORTING THE TEMPLATE BASE -->
+    {% include 'header.html' %}
+
+
+    <!--=============== BEGIN #page =================================== -->
+    <div id="page" style="padding-top: 6px">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 letters">
+            <a href="/subir_video/" class="color-white">Subir video</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters">
+            <a href="/subir_definicion/" class="color-white">Subir definición</a>
+          </div>
+          <div class="col-xs-12 col-sm-4 letters letter-selected border-correction">
+            <a class="color-white">Validar archivos</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 bg-white padding-top-30">
+
+            <div class="row row-files-validation">
+              <div class="col-xs-12">
+                <b>Palabra: {{word_data.name}}</b>
+              </div>
+              <div class="col-xs-12">
+                Definición: {{word_data.definition}}
+              </div>
+              <div class="col-xs-12">
+                Configuración manual: <a style="font-size: 25px"><span class="icon icon-{{icon_code}}"></span></a>
+              </div>
+              <div class="col-xs-12">
+                {% for video in word_data.files %}
+                  <video class="center margin-top-10" width="300" controls>
+                    <source src="{{video}}" type="video/mp4">
+                  </video>
+                {% endfor %}
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                Votos positivos: {{word_data.positive}}
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                Votos negativos: {{word_data.negative}}
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                Porcentaje votos positivos: {{word_data.positive_percentage}}%
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                Porcentaje votos negativos: {{word_data.negative_percentage}}%
+              </div>
+              <div class="col-xs-6">
+                <button class="btn btn-success margin-btn"><span class="glyphicon glyphicon-ok"></span> Aceptar</button>
+              </div>
+              <div class="col-xs-6">
+                <button class="btn btn-danger margin-btn"><span class="glyphicon glyphicon-remove"></span> Rechazar</button>
+              </div>
+            </div>
+
+          </div>                 
+        </div>
+
+      </div>  
+    </div>
+    <!--================== END #page ================================== -->
+
+    {% include 'footer.html' %}
+
+  </body>
+</html>
