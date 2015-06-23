@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     url(r'^iniciar_sesion/$','api.views.login'),
     url(r'^cerrar_sesion/$','api.views.logout'),
 
+    url(r'^modificar_contrasena/$','api.views.change_password'),
+
     url(r'^pagar_por_palabra/$','api.views.pay_per_word'), 
 
     url(r'^error/$','api.views.error'), 

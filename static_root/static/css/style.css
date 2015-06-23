@@ -118,7 +118,21 @@
 }
 
 .error{
-    color: #FF9815;
+    color: #E90303;
+}
+
+.alert-danger {
+    background-color: #FFFFFF ;
+    border-color: #FFFFFF;
+    color: #E90303;
+    padding-left: 0px;
+}
+
+.alert-success{
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    color: #238329;
+    padding-left: 0px;
 }
 
 a{

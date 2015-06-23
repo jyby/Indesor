@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 from __future__ import division 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, render_to_response, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import RequestContext
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from random import randint
+import ast
 import requests
 import json,sys
-import ast
+from random import randint
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import RequestContext
+from django.shortcuts import render, render_to_response, redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -84,6 +84,10 @@ def login(request):
 def logout(request):
 	request.session.flush()
 	return HttpResponseRedirect('/acerca_del_proyecto')
+
+
+def change_password(request):
+	return render_to_response('modificar_contraseña.html', locals(), context_instance=RequestContext(request))
 
 
 def get_words(request, letra):
@@ -219,7 +223,8 @@ def upload_video_existing_word(request):
 	# 	return HttpResponseRedirect('/error/')
 
 	words = requests.get('http://localhost:8000/api/v1.0/get_words_by_status/?status=VA')
-	list_of_words = words.json()['data']
+	if words.json()['status'] == 'ok':
+		list_of_words = words.json()['data']
 
 	if request.method == 'GET':		
 		return render_to_response('palabra_existente.html', locals(), context_instance=RequestContext(request),)
@@ -261,7 +266,8 @@ def upload_definition(request):
 	# 	return HttpResponseRedirect('/error/')	
 
 	words = requests.get('http://localhost:8000/api/v1.0/get_words_by_status/?status=IN')
-	list_of_words = words.json()['data']	
+	if words.json()['status'] == 'ok':
+		list_of_words = words.json()['data']	
 
 	if request.method == 'GET':
 		return render_to_response('subir_definicion.html', locals(), context_instance=RequestContext(request),)

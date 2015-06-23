@@ -74,11 +74,7 @@
                 {% endif %}
 
                 {% for word in words %}
-                    <li class="
-                    {% if forloop.first %}
-                      active 
-                    {% endif %}
-                    scroll-tabs"><a class="clase_ajax" role="tab" data-toggle="tab">{{ word.name }}</a></li>
+                    <li class="scroll-tabs"><a class="clase_ajax" role="tab" data-toggle="tab">{{ word.name }}</a></li>
                 {% endfor %}
 
                 {% if words.has_next %}
@@ -96,13 +92,13 @@
 
               <!--/.nav-tabs.content-tabs -->
               <div class="tab-content content-tabcollapse-visible-xl">
-
+                <div class="tab-pane active" id="blank">
+                  <div class="pane-content clearfix">
+                  </div>
+                </div>
+                
                 {% for word in list_of_words %}
-                  <div class="
-                  {% if forloop.first %}
-                    active            
-                  {% endif %}
-                  tab-pane" id="{{word.name}}">
+                  <div class="tab-pane" id="{{word.name}}">
                   <div class="pane-content clearfix">
 
                     {%for video in word.files%}
