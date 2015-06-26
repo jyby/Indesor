@@ -11,14 +11,15 @@
       <div class="container">
 
         <div class="row">
-          <div class="col-xs-12 col-sm-4 letters">
-            Subir Video
+          <div class="col-xs-12 col-sm-6 letters border-menu">
+          {% if request.session.user_type == '01' %}
+            <a href="/subir_video/" class="color-white">Subir video</a>
+          {% else %}
+            <a href="/subir_definicion/" class="color-white">Subir definición</a>
+          {% endif %}
           </div>
-          <div class="col-xs-12 col-sm-4 letters letter-selected">
-            Completar desafío
-          </div>
-          <div class="col-xs-12 col-sm-4 letters border-correction">
-            Material adicional
+          <div class="col-xs-12 col-sm-6 letters letter-selected border-menu">
+            <a class="color-white">Completar desafío</a>
           </div>
         </div>
 
@@ -26,50 +27,75 @@
           <form role="form" action="/resultado/" method="post">
            {% csrf_token %}
 				  <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
-            <video class="center" width="400" controls>
-            	<source src="{{challenge.correct_word.video}}" type="video/mp4">
-            </video>
+            {% if number == 0 %}
+              <p style="font-size: 25px; text-align:center;"><b><i>{{challenge.correct_word.definition}}</i></b></p>
+            {% else %}
+              <p style="font-size: 25px; text-align:center;"><b><i>{{challenge.unknown_word.definition}}</i></b></p>
+            {%endif%}
 				  </div>
 		      <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
-		      	<p>¿Qué palabra representa la seña del video?</p>
+		      	<p>¿Qué palabra representa la definición?</p>
 
 
               <input type="hidden" name="id_known" value="{{challenge.correct_word.id}}">
-
-              {% for word in challenge.correct_word.options %}
-					    <div class="radio">
-                {% if forloop.first %}
-                  <label><input type="radio" name="option_known" value="{{word}}" checked="checked">{{word}}</label>
-                {% else %}
-                  <label><input type="radio" name="option_known" value="{{word}}">{{word}}</label>                
-                {% endif %}
-					    </div>
-              {% endfor %}
-
+              {% if number == 0 %}
+                {% for word in challenge.correct_word.options %}
+  					    <div class="radio">
+                  {% if forloop.first %}
+                    <label><input type="radio" name="option_known" value="{{word}}" checked="checked">{{word}}</label>
+                  {% else %}
+                    <label><input type="radio" name="option_known" value="{{word}}">{{word}}</label>                
+                  {% endif %}
+  					    </div>
+                {% endfor %}
+              {% else %}
+                {% for word in challenge.unknown_word.options %}
+                <div class="radio">
+                  {% if forloop.first %}
+                    <label><input type="radio" name="option_unknown" value="{{word}}" checked="checked">{{word}}</label>
+                  {% else %}
+                    <label><input type="radio" name="option_unknown" value="{{word}}">{{word}}</label>
+                  {% endif %}                  
+                </div>
+                {% endfor %}                
+              {% endif %}
             <button class="btn btn-slide-panel btn-lg btn-block" style="margin-bottom: 30px">Siguiente</button>
 
 		      </div>       
 	      </div>
         <div class="row" id="second_question" style="display:none;">
           <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
-            <video class="center" width="400" controls>
-              <source src="{{challenge.unknown_word.video}}" type="video/mp4">
-            </video>
+            {% if number == 0 %}
+              <p style="font-size: 25px; text-align:center;"><b><i>{{challenge.unknown_word.definition}}</i></b></p>
+            {% else %}
+              <p style="font-size: 25px; text-align:center;"><b><i>{{challenge.correct_word.definition}}</i></b></p>
+            {%endif%}
           </div>
           <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
-            <p>¿Qué palabra representa la seña del video?</p>
+            <p>¿Qué palabra representa la definición?</p>
 
               <input type="hidden" name="id_unknown" value="{{challenge.unknown_word.id}}">
-
-              {% for word in challenge.unknown_word.options %}
-              <div class="radio">
-                {% if forloop.first %}
-                  <label><input type="radio" name="option_unknown" value="{{word}}" checked="checked">{{word}}</label>
-                {% else %}
-                  <label><input type="radio" name="option_unknown" value="{{word}}">{{word}}</label>
-                {% endif %}                  
-              </div>
-              {% endfor %}
+              {% if number == 0 %}
+                {% for word in challenge.unknown_word.options %}
+                <div class="radio">
+                  {% if forloop.first %}
+                    <label><input type="radio" name="option_unknown" value="{{word}}" checked="checked">{{word}}</label>
+                  {% else %}
+                    <label><input type="radio" name="option_unknown" value="{{word}}">{{word}}</label>
+                  {% endif %}                  
+                </div>
+                {% endfor %}
+              {% else %}
+                {% for word in challenge.correct_word.options %}
+                <div class="radio">
+                  {% if forloop.first %}
+                    <label><input type="radio" name="option_known" value="{{word}}" checked="checked">{{word}}</label>
+                  {% else %}
+                    <label><input type="radio" name="option_known" value="{{word}}">{{word}}</label>                
+                  {% endif %}
+                </div>
+                {% endfor %}
+              {% endif %}              
               <button class="btn btn-slide-panel btn-lg btn-block" style="margin-bottom: 30px">Enviar</button>
 
 

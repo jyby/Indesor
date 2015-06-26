@@ -111,7 +111,7 @@
                 <source src="{% static 'videos/Video08.mp4' %}" type="video/mp4">
               </video>
 
-              <script>
+              <script type="text/JavaScript">
               $('#video2').hide();
               $('#video3').hide();
               </script>
@@ -130,29 +130,41 @@
                 </li>
                 <li>
                   <a href="#" onclick="$('#video2').hide(); $(video1).hide(); $(video3).show();"><b>Diccionario Multimedia</b></a>
-                  <a href="/configuracion_manual/01" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                  {% if request.session.user_type == '01' %}
+                    <a href="/configuracion_manual/01" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                  {% else %}
+                    <a href="/orden_alfabetico/A" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                  {% endif %}
                 </li>
               </ul>
             </div>
 
             <div class="col-md-3">
-              <ul class="list-unstyled">     
-                <li>
-                  <a href="#"><b>Subir video</b></a>
-                  <a href="/subir_video/" class="color-orange glyphicon glyphicon-arrow-right"></a>
-                </li>
-                <li>
-                  <a href="#"><b>Subir definición</b></a>
-                  <a href="/subir_definicion/" class="color-orange glyphicon glyphicon-arrow-right"></a>
-                </li>
-                <li>
-                  <a href="#"><b>Validar archivos</b></a>
-                  <a href="/listado_archivos/" class="color-orange glyphicon glyphicon-arrow-right"></a>
-                </li>
-                <li>
-                  <a href="#"><b>Completar Desafío</b></a>
-                  <a href="/desafio/" class="color-orange glyphicon glyphicon-arrow-right"></a>
-                </li>
+              <ul class="list-unstyled">
+                {% if request.session.user_type == '01' %}
+                  <li>
+                    <a href="#"><b>Subir video</b></a>
+                    <a href="/subir_video/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                  </li>
+                  <li>
+                    <a href="#"><b>Completar Desafío</b></a>
+                    <a href="/desafio/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                  </li>
+                {%elif request.session.user_type == '02' %}                   
+                  <li>
+                    <a href="#"><b>Subir definición</b></a>
+                    <a href="/subir_definicion/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                  </li>
+                  <li>
+                    <a href="#"><b>Completar Desafío</b></a>
+                    <a href="/desafio/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                  </li>
+                {% elif request.session.user_type == '03' %}  
+                  <li>
+                    <a href="#"><b>Validar archivos</b></a>
+                    <a href="/listado_archivos/" class="color-orange glyphicon glyphicon-arrow-right"></a>
+                  </li>
+                {% endif %}  
               </ul>
             </div>
 

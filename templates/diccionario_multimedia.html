@@ -29,8 +29,14 @@
                   letter-selected
                 {% endif %}
                 col-xs-9">
+                  {% if letter == "0" %}
+
                   <a class ="color-white" href="
+                  /orden_alfabetico/0"> Ñ </a>
+                  {% else %}
+                    <a class ="color-white" href="
                   /orden_alfabetico/{{letter}}"> {{letter}} </a>
+                  {%endif%}
                 </div>
               {% endfor %}
             </div>
@@ -124,8 +130,7 @@
                 {% endfor %}
                 <div class="tab-pane" id="no-credit">
                   <div class="pane-content clearfix">
-                      No tiene credito, haga algo
-
+                      <p class="definition">No tiene suficientes <i class="fa fa-thumbs-up header-icon"></i> para acceder a esta palabra.</p>
                   </div>
                 </div>
 

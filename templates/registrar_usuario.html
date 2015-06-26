@@ -11,14 +11,18 @@
       <div class="container">
 
         <div class="row">
-          <div class="col-xs-12 col-sm-4 letters">
-            Subir video
+          <div class="col-xs-12 col-sm-4 letters border-menu">
+            <a href="/acerca_del_proyecto/" class="color-white">Acerca del Proyecto</a>
           </div>
-          <div class="col-xs-12 col-sm-4 letters letter-selected">
-            Completar desafío
+          <div class="col-xs-12 col-sm-4 letters border-menu">
+            <a href="/como_funciona/" class="color-white">Cómo funciona</a>
           </div>
-          <div class="col-xs-12 col-sm-4 letters border-correction">
-            Material adicional
+          <div class="col-xs-12 col-sm-4 letters border-menu border-correction">
+          {% if request.session.user_type == '01' %}
+            <a href="/configuracion_manual/01" class="color-white">Diccionario Multimedia</a>
+          {% else %}
+            <a href="/orden_alfabetico/A" class="color-white">Diccionario Multimedia</a>
+          {% endif %}
           </div>
         </div>
 

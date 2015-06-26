@@ -48,7 +48,7 @@ def create_user(request):
 
 	else:
 		if r.json()['error'] == "Username already exists":
-			error = "Escoja otro nombre de usuario."
+			error = "El nombre de usuario que escogió ya existe. Por favor ingrese otro nombre de usuario."
 
 		return render_to_response('registrar_usuario.html', locals(), context_instance=RequestContext(request),)
 
@@ -91,6 +91,11 @@ def change_password(request):
 
 
 def get_words(request, letra):
+	if 'username' not in request.session:
+		return HttpResponseRedirect('/error/')
+
+	if letra=='0':
+		letra='Ñ'
 	letra = letra.upper()
 
 	r = requests.get('http://localhost:8000/api/v1.0/get_words/?character=' + letra)
@@ -101,7 +106,7 @@ def get_words(request, letra):
 	else:
 		list_of_words = r.json()['data']
 
-	letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+	letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','0','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 	
 	#Search code
 	try:
@@ -129,6 +134,9 @@ def get_words(request, letra):
 
 
 def get_words_manual_config(request, manual_configuration):
+	if 'username' not in request.session:
+		return HttpResponseRedirect('/error/')
+			
 	r = requests.get('http://localhost:8000/api/v1.0/get_manual_config/?manual_configuration=' + manual_configuration)
 
 	if r.json()['status'] == 'error':
@@ -169,15 +177,21 @@ def get_words_manual_config(request, manual_configuration):
 
 
 def upload_video(request):
+	try:
+		if request.session['user_type'] == '02':
+			return HttpResponseRedirect('/error/')
+	except:
+		return HttpResponseRedirect('/error/')
+
 	return render_to_response('subir_video.html', locals(), context_instance=RequestContext(request),)
 
 
 def upload_video_new_word(request):
-	# try:
-	# 	if request.session['user_type'] == '02':
-	# 		return HttpResponseRedirect('/error/')
-	# except:
-	# 	return HttpResponseRedirect('/error/')
+	try:
+		if request.session['user_type'] == '02':
+			return HttpResponseRedirect('/error/')
+	except:
+		return HttpResponseRedirect('/error/')
 
 	if request.method == 'GET':
 		return render_to_response('palabra_nueva.html', locals(), context_instance=RequestContext(request),)
@@ -194,7 +208,9 @@ def upload_video_new_word(request):
 
 			params = {
 				'word_name': word_name,
-				'manual_configuration': manual_configuration
+				'manual_configuration': manual_configuration,
+				'username' : request.session["username"],
+				'password' : request.session["password"]
 			}
 
 			r = requests.post('http://localhost:8000/api/v1.0/word/upload_file_new_word/', data=params, files=files)
@@ -216,11 +232,11 @@ def upload_video_new_word(request):
 
 
 def upload_video_existing_word(request):
-	# try:
-	# 	if request.session['user_type'] == '02':
-	# 		return HttpResponseRedirect('/error/')
-	# except:
-	# 	return HttpResponseRedirect('/error/')
+	try:
+		if request.session['user_type'] == '02':
+			return HttpResponseRedirect('/error/')
+	except:
+		return HttpResponseRedirect('/error/')
 
 	words = requests.get('http://localhost:8000/api/v1.0/get_words_by_status/?status=VA')
 	if words.json()['status'] == 'ok':
@@ -238,7 +254,9 @@ def upload_video_existing_word(request):
 				files = {'file': file}
 
 			params = {
-				'word_name': word_name
+				'word_name': word_name,
+				'username' : request.session["username"],
+				'password' : request.session["password"]				
 			}
 
 			r = requests.post('http://localhost:8000/api/v1.0/word/upload_file_existing_word/', data=params, files=files)
@@ -259,15 +277,15 @@ def upload_video_existing_word(request):
 
 
 def upload_definition(request):
-	# try:
-	# 	if request.session['user_type'] == '02':
-	# 		return HttpResponseRedirect('/error/')
-	# except:
-	# 	return HttpResponseRedirect('/error/')	
+	try:
+		if request.session['user_type'] == '01':
+			return HttpResponseRedirect('/error/')
+	except:
+		return HttpResponseRedirect('/error/')
 
 	words = requests.get('http://localhost:8000/api/v1.0/get_words_by_status/?status=IN')
 	if words.json()['status'] == 'ok':
-		list_of_words = words.json()['data']	
+		list_of_words = words.json()['data']
 
 	if request.method == 'GET':
 		return render_to_response('subir_definicion.html', locals(), context_instance=RequestContext(request),)
@@ -280,7 +298,9 @@ def upload_definition(request):
 
 			params = {
 				'word_name': word_name,
-				'word_definition': word_definition
+				'word_definition': word_definition,
+				'username' : request.session["username"],
+				'password' : request.session["password"]				
 			}
 
 			r = requests.post('http://localhost:8000/api/v1.0/word/upload_definition/', data=params)
@@ -289,9 +309,13 @@ def upload_definition(request):
 
 			if status == 'ok':
 				result = "La definición se ha subido correctamente."
+
 			else:
 				result = "Hubo un error al subir la definición."
-
+			list_of_words =[]
+			words = requests.get('http://localhost:8000/api/v1.0/get_words_by_status/?status=IN')
+			if words.json()['status'] == 'ok':
+				list_of_words = words.json()['data']
 			return render_to_response('subir_definicion.html', locals(), context_instance=RequestContext(request),)
 
 		except:
@@ -302,6 +326,12 @@ def upload_definition(request):
 
 
 def files_to_validate(request):
+	try:
+		if request.session['user_type'] == '01' or request.session['user_type'] == '02':
+			return HttpResponseRedirect('/error/')
+	except:
+		return HttpResponseRedirect('/error/')
+
 	if request.method == 'GET':
 
 		r = requests.get('http://localhost:8000/api/v1.0/get_words_to_validate/')
@@ -316,6 +346,12 @@ def files_to_validate(request):
 
 
 def validate(request):
+	try:
+		if request.session['user_type'] == '01' or request.session['user_type'] == '02':
+			return HttpResponseRedirect('/error/')
+	except:
+		return HttpResponseRedirect('/error/')
+
 	if request.method == 'GET':
 
 		word = request.GET['palabra']
@@ -333,7 +369,48 @@ def validate(request):
 		return render_to_response('validar_archivo.html', locals(), context_instance=RequestContext(request))
 
 
+def validate_word(request):
+	try:
+		if request.session['user_type'] == '01' or request.session['user_type'] == '02':
+			return HttpResponseRedirect('/error/')
+	except:
+		return HttpResponseRedirect('/error/')
+
+	if request.method == 'GET':
+		word = request.GET['palabra']
+		answer = request.GET['respuesta']
+
+		if answer == 'Aceptar':
+			answer = 'Accept'
+
+		else:
+			answer = 'Reject'
+
+		params = {
+			'word': word,
+			'answer': answer,
+			'username' : request.session["username"],
+			'password' : request.session["password"]				
+		}
+
+		r = requests.post('http://localhost:8000/api/v1.0/word/validate_word/', data=params)
+
+		credit = r.json()['credit']
+		request.session['credit'] = credit
+
+		return HttpResponseRedirect('/listado_archivos/')
+
+
 def challenge(request):
+	try:
+		if request.session['user_type'] == '01':
+			url = '/desafio_video/'
+		elif request.session['user_type'] == '02':
+			url = '/desafio_definicion'
+		else:
+			url = '/error/'
+	except:
+		return HttpResponseRedirect('/error/')
 	return render_to_response('desafio.html', locals(), context_instance=RequestContext(request))
 
 
@@ -363,6 +440,15 @@ def video_challenge_result(request):
 		return render_to_response('ganaste.html', locals(), context_instance=RequestContext(request))
 	else:
 		return render_to_response('perdiste.html', locals(), context_instance=RequestContext(request))
+
+
+def definition_challenge(request):
+	r = requests.get('http://localhost:8000/api/v1.0/word_challenge_definition/')
+	challenge = r.json()
+	random_number = randint(0,1)
+	number = random_number
+
+	return render_to_response('desafio_definicion.html', locals(), context_instance=RequestContext(request))
 
 
 def pay_per_word(request):

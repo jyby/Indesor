@@ -9,21 +9,26 @@
     <div id="page" style="padding-top: 6px">
 
       <div class="container">
+      
         <div class="row">
-          <div class="col-xs-12 col-sm-4 letters">
+          <div class="col-xs-12 col-sm-4 letters border-menu">
             <a href="/acerca_del_proyecto/" class="color-white">Acerca del Proyecto</a>
           </div>
-          <div class="col-xs-12 col-sm-4 letters letter-selected">
+          <div class="col-xs-12 col-sm-4 letters letter-selected border-menu">
             <a class="color-white">Cómo funciona</a>
           </div>
-          <div class="col-xs-12 col-sm-4 letters border-correction">
+          <div class="col-xs-12 col-sm-4 letters border-menu border-correction">
+          {% if request.session.user_type == '01' %}
             <a href="/configuracion_manual/01" class="color-white">Diccionario Multimedia</a>
+          {% else %}
+            <a href="/orden_alfabetico/A" class="color-white">Diccionario Multimedia</a>
+          {% endif %}
           </div>
         </div>
 
         <div class="row">
           <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
-            <video id="video1" class="center" width="400" controls>
+            <video class="center" width="400" controls>
               <source src="{% static 'videos/Video02.mp4' %}" type="video/mp4">
             </video>        
           </div>          

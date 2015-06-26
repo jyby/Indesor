@@ -11,14 +11,15 @@
       <div class="container">
 
         <div class="row">
-          <div class="col-xs-12 col-sm-4 letters">
-            Subir Video
+          <div class="col-xs-12 col-sm-6 letters border-menu">
+          {% if request.session.user_type == '01' %}
+            <a href="/subir_video/" class="color-white">Subir video</a>
+          {% else %}
+            <a href="/subir_definicion/" class="color-white">Subir definición</a>
+          {% endif %}
           </div>
-          <div class="col-xs-12 col-sm-4 letters letter-selected">
-            Completar desafío
-          </div>
-          <div class="col-xs-12 col-sm-4 letters border-correction">
-            Material adicional
+          <div class="col-xs-12 col-sm-6 letters letter-selected border-menu">
+            <a class="color-white">Completar desafío</a>
           </div>
         </div>
 
@@ -26,9 +27,15 @@
           <form role="form" action="/resultado/" method="post">
            {% csrf_token %}
 				  <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+          {% if number == 0 %}
             <video class="center" width="400" controls>
             	<source src="{{challenge.correct_word.video}}" type="video/mp4">
             </video>
+          {% else %}
+            <video class="center" width="400" controls>
+              <source src="{{challenge.unknown_word.video}}" type="video/mp4">
+            </video> 
+          {%  endif %}           
 				  </div>
 		      <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
 		      	<p>¿Qué palabra representa la seña del video?</p>
@@ -63,9 +70,15 @@
 	      </div>
         <div class="row" id="second_question" style="display:none;">
           <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
+          {% if number == 0 %}
             <video class="center" width="400" controls>
               <source src="{{challenge.unknown_word.video}}" type="video/mp4">
             </video>
+          {% else %}
+            <video class="center" width="400" controls>
+              <source src="{{challenge.correct_word.video}}" type="video/mp4">
+            </video> 
+          {%  endif %}
           </div>
           <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
             <p>¿Qué palabra representa la seña del video?</p>

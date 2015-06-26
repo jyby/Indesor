@@ -9,15 +9,13 @@
     <div id="page" style="padding-top: 6px">
 
       <div class="container">
+
         <div class="row">
-          <div class="col-xs-12 col-sm-4 letters letter-selected">
+          <div class="col-xs-12 col-sm-6 letters letter-selected border-menu">
             <a class="color-white">Subir definición</a>
           </div>
-          <div class="col-xs-12 col-sm-4 letters">
+          <div class="col-xs-12 col-sm-6 letters border-menu">
             <a href="/desafio/" class="color-white">Completar desafío</a>
-          </div>
-          <div class="col-xs-12 col-sm-4 letters border-correction">
-            <a class="color-white">Material Adicional</a>
           </div>
         </div>
 
@@ -41,7 +39,7 @@
               </div>
             {% endif %}
 
-            <form role="form" action="/subir_definicion/" method="POST">
+            <form id="def_form" role="form" action="/subir_definicion/" method="POST">
             {% csrf_token %}
 
               <div class="form-group">
@@ -67,9 +65,31 @@
 
       </div>  
     </div>
+
     <!--================== END #page ================================== -->
 
     {% include 'footer.html' %}
+   <script type="text/javascript">
+    $("#def_form").validate({
+      rules: {
+        definition: {
+          required: true
+        }
 
+      },
+
+      messages: {
+        definition: {
+          required: 'Ingrese una definición.'
+        }
+
+      },
+
+      errorPlacement: function(error, element){
+        error.insertAfter(element.parent());
+      }
+
+    });
+    </script>   
   </body>
 </html>

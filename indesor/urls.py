@@ -20,8 +20,10 @@ urlpatterns = patterns('',
     url(r'^subir_definicion/$', 'api.views.upload_definition'),
     url(r'^listado_archivos/$', 'api.views.files_to_validate'),    
     url(r'^validar_archivo/$', 'api.views.validate'),
+    url(r'^validar_palabra/$', 'api.views.validate_word'),    
     url(r'^desafio/$', 'api.views.challenge'),
     url(r'^desafio_video/$', 'api.views.video_challenge'),
+    url(r'^desafio_definicion/$', 'api.views.definition_challenge'),
     url(r'^resultado/$', 'api.views.video_challenge_result'),
 
     url(r'^registrar_usuarios/$','api.views.create_user'),
@@ -34,6 +36,6 @@ urlpatterns = patterns('',
 
     url(r'^error/$','api.views.error'), 
 
-    url(r'^orden_alfabetico/(?P<letra>[a-zA-ZñÑ]{1})/$', 'api.views.get_words'),
+    url(r'^orden_alfabetico/(?P<letra>[a-zA-Z0]{1})/$', 'api.views.get_words'),
     url(r'^configuracion_manual/(?P<manual_configuration>[0-9]{2})/$', 'api.views.get_words_manual_config'),
 )
