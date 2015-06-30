@@ -215,7 +215,6 @@ def upload_video_new_word(request):
 
 			r = requests.post('http://localhost:8000/api/v1.0/word/upload_file_new_word/', data=params, files=files)
 
-			#print >>sys.stderr, r.text
 			status = r.json()['status']
 
 			if status == 'ok':

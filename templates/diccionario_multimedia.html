@@ -89,7 +89,7 @@
                 {% endif %}
 
                 {% for word in words %}
-                    <li class="scroll-tabs"><a class="clase_ajax"  role="tab" data-toggle="tab">{{ word.name }}</a></li>
+                    <li class="scroll-tabs"><a class="clase_ajax" href="#{{word.name}}" role="tab" data-toggle="tab">{{word.name}}</a></li>
                 {% endfor %}
 
                 {% if words.has_next %}
@@ -113,21 +113,22 @@
 
                 {% for word in words %}
                   <div class="tab-pane" id="{{word.name}}">
-                  <div class="pane-content clearfix">
+                    <div class="pane-content clearfix">
 
-                    {%for video in word.files%}
-                      <video class="center margin-top-10" width="400" controls>
-                        <source src="{{video}}" type="video/mp4">
-                      </video>                                  
-                    {% endfor %}
+                      {%for video in word.files%}
+                        <video class="center margin-top-10" width="400" controls>
+                          <source src="{{video}}" type="video/mp4">
+                        </video>                                  
+                      {% endfor %}
 
-                    <p class="definition"><b>{{word.name}}: </b>{{word.definition}}</p>
+                      <p class="definition"><b>{{word.name}}: </b>{{word.definition}}</p>
 
-                  </div>
-                  <!--/.pane-content -->
+                    </div>
+                    <!--/.pane-content -->
                 </div>
                 <!--/.tab-pane -->
                 {% endfor %}
+
                 <div class="tab-pane" id="no-credit">
                   <div class="pane-content clearfix">
                       <p class="definition">No tiene suficientes <i class="fa fa-thumbs-up header-icon"></i> para acceder a esta palabra.</p>
