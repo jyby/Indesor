@@ -214,13 +214,14 @@ def upload_video_new_word(request):
 			}
 
 			r = requests.post('http://localhost:8000/api/v1.0/word/upload_file_new_word/', data=params, files=files)
+			request.session["credit"] = r.json()['credit']
 
 			status = r.json()['status']
 
 			if status == 'ok':
 				result = "El archivo se ha subido correctamente."
 			else:
-				result = "Hubo un error al subir el archivo."
+				result = "Usted no tiene suficiente crédito para realizar esta acción."
 
 			return render_to_response('palabra_nueva.html', locals(), context_instance=RequestContext(request),)
 		
@@ -259,13 +260,14 @@ def upload_video_existing_word(request):
 			}
 
 			r = requests.post('http://localhost:8000/api/v1.0/word/upload_file_existing_word/', data=params, files=files)
+			request.session["credit"] = r.json()['credit']
 
 			status = r.json()['status']
 
 			if status == 'ok':
 				result = "El archivo se ha subido correctamente."
 			else:
-				result = "Hubo un error al subir el archivo."
+				result = "Usted no tiene suficiente crédito para realizar esta acción."
 
 			return render_to_response('palabra_existente.html', locals(), context_instance=RequestContext(request),)
 
@@ -303,6 +305,7 @@ def upload_definition(request):
 			}
 
 			r = requests.post('http://localhost:8000/api/v1.0/word/upload_definition/', data=params)
+			request.session["credit"] = r.json()['credit']
 
 			status = r.json()['status']
 
@@ -310,7 +313,7 @@ def upload_definition(request):
 				result = "La definición se ha subido correctamente."
 
 			else:
-				result = "Hubo un error al subir la definición."
+				result = "Usted no tiene suficiente crédito para realizar esta acción."
 			list_of_words =[]
 			words = requests.get('http://localhost:8000/api/v1.0/get_words_by_status/?status=IN')
 			if words.json()['status'] == 'ok':
