@@ -90,16 +90,16 @@
                 {% endif %}
 
                 {% for word in words %}
-                    <li class="scroll-tabs"><a class="clase_ajax" href="#{{word.name}}" role="tab" data-toggle="tab">{{word.name}}</a></li>
+                  <li class="scroll-tabs"><a class="clase_ajax" href="#{{word.name}}" role="tab" data-toggle="tab">{{word.name}}</a></li>
                 {% endfor %}
 
                 {% if words.has_next %}
                 <div class="scroll">
-                <a href="?pagina={{words.next_page_number}}" id="flechas"><span class="color-green glyphicon glyphicon-chevron-down"></span></a>
+                  <a href="?pagina={{words.next_page_number}}" id="flechas"><span class="color-green glyphicon glyphicon-chevron-down"></span></a>
                 </div>
                 {% else %}
                 <div class="scroll">
-                <span class="color-grey glyphicon glyphicon-chevron-down"></span>
+                  <span class="color-grey glyphicon glyphicon-chevron-down"></span>
                 </div>                
                 {% endif %}
 
@@ -179,7 +179,6 @@
             e.preventDefault();
             window.location = $(this).attr('href');
           });
-
 
     </script>
 
