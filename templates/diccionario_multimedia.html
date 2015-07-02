@@ -13,8 +13,10 @@
         <div class="row block-letters">
 
           <div class="col-xs-1 bg-orange letters letters-big big">
-            <span class="big">
-            {% if letra %}
+            <span class="big-letter">
+            {% if letra == "0" %}
+              Ñ
+            {% else %}
               {{letra}} 
             {% endif %}
             </span>
@@ -30,9 +32,8 @@
                 {% endif %}
                 col-xs-9">
                   {% if letter == "0" %}
-
-                  <a class ="color-white" href="
-                  /orden_alfabetico/0"> Ñ </a>
+                    <a class ="color-white" href="
+                    /orden_alfabetico/0"> Ñ </a>
                   {% else %}
                     <a class ="color-white" href="
                   /orden_alfabetico/{{letter}}"> {{letter}} </a>

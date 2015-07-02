@@ -94,8 +94,6 @@ def get_words(request, letra):
 	if 'username' not in request.session:
 		return HttpResponseRedirect('/error/')
 
-	if letra=='0':
-		letra='Ñ'
 	letra = letra.upper()
 
 	r = requests.get('http://localhost:8000/api/v1.0/get_words/?character=' + letra)
@@ -403,6 +401,23 @@ def validate_word(request):
 		return HttpResponseRedirect('/listado_archivos/')
 
 
+def modify_word(request):
+
+	params = {
+	'name': request.POST['name'],
+	'definition': request.POST['definition'],
+	'manual_configuration': request.POST['mc_radio'],
+	'username' : request.session["username"],
+	'password' : request.session["password"]		
+	}
+
+	r = requests.post('http://localhost:8000/api/v1.0/modify_word/', data=params)
+
+	if r.json()['status'] == "ok":
+		word = r.json()['word_name']
+		return HttpResponseRedirect('/validar_archivo/?palabra=' + word)
+
+
 def challenge(request):
 	try:
 		if request.session['user_type'] == '01':
@@ -418,14 +433,37 @@ def challenge(request):
 
 def video_challenge(request):
 	r = requests.get('http://localhost:8000/api/v1.0/word_challenge_video/')
-	challenge = r.json()
-	random_number = randint(0,1)
-	number = random_number
 
-	return render_to_response('desafio_video.html', locals(), context_instance=RequestContext(request))
+	if r.json()['status'] == 'error':
+		error = "No hay suficientes palabras para completar un desafío."
+
+		return render_to_response('desafio.html', locals(), context_instance=RequestContext(request))
+
+	else:
+		challenge = r.json()
+		random_number = randint(0,1)
+		number = random_number
+
+		return render_to_response('desafio_video.html', locals(), context_instance=RequestContext(request))
 
 
-def video_challenge_result(request):
+def definition_challenge(request):
+	r = requests.get('http://localhost:8000/api/v1.0/word_challenge_definition/')
+
+	if r.json()['status'] == 'error':
+		error = "No hay suficientes palabras para completar un desafío."
+
+		return render_to_response('desafio.html', locals(), context_instance=RequestContext(request))
+
+	else:	
+		challenge = r.json()
+		random_number = randint(0,1)
+		number = random_number
+
+		return render_to_response('desafio_definicion.html', locals(), context_instance=RequestContext(request))
+
+
+def challenge_result(request):
 	params = {
 		'id_word_known': request.POST['id_known'],
 		'id_word_unknown': request.POST['id_unknown'],
@@ -442,15 +480,6 @@ def video_challenge_result(request):
 		return render_to_response('ganaste.html', locals(), context_instance=RequestContext(request))
 	else:
 		return render_to_response('perdiste.html', locals(), context_instance=RequestContext(request))
-
-
-def definition_challenge(request):
-	r = requests.get('http://localhost:8000/api/v1.0/word_challenge_definition/')
-	challenge = r.json()
-	random_number = randint(0,1)
-	number = random_number
-
-	return render_to_response('desafio_definicion.html', locals(), context_instance=RequestContext(request))
 
 
 def pay_per_word(request):

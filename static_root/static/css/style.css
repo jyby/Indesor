@@ -45,6 +45,20 @@
   }
 }
 
+.big-letter{
+    font-size: 65px;
+    display: table;
+    margin: -5px auto;
+}
+
+@media (max-width: 767px){
+  .big-letter{
+    font-size: 35px;
+    display: table;
+    margin: 19px auto;
+  }
+}
+
 .text-big{
     font-size: 30px !important;
     text-align: center !important;
