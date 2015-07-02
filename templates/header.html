@@ -102,18 +102,38 @@
 
             <div class="col-md-6">
               <video id="video1" class="center" width="400" controls>
-                <source src="{% static 'videos/Video06.mp4' %}" type="video/mp4">
+                <source src="{% static 'videos/Video25.mp4' %}" type="video/mp4">
               </video>
               <video id="video2" class="center" width="400" controls>
-                <source src="{% static 'videos/Video07.mp4' %}" type="video/mp4">
+                <source src="{% static 'videos/Video06.mp4' %}" type="video/mp4">
               </video>
               <video id="video3" class="center" width="400" controls>
+                <source src="{% static 'videos/Video07.mp4' %}" type="video/mp4">
+              </video>
+              <video id="video4" class="center" width="400" controls>
                 <source src="{% static 'videos/Video08.mp4' %}" type="video/mp4">
+              </video>
+              <video id="video5" class="center" width="400" controls>
+                <source src="{% static 'videos/Video09.mp4' %}" type="video/mp4">
+              </video>
+              <video id="video6" class="center" width="400" controls>
+                <source src="{% static 'videos/Video10.mp4' %}" type="video/mp4">
+              </video>
+              <video id="video7" class="center" width="400" controls>
+                <source src="{% static 'videos/Video11.mp4' %}" type="video/mp4">
+              </video>
+              <video id="video8" class="center" width="400" controls>
+                <source src="{% static 'videos/Video12.mp4' %}" type="video/mp4">
               </video>
 
               <script type="text/JavaScript">
               $('#video2').hide();
               $('#video3').hide();
+              $('#video4').hide();
+              $('#video5').hide();
+              $('#video6').hide();
+              $('#video7').hide();
+              $('#video8').hide();                          
               </script>
 
             </div>
@@ -121,15 +141,15 @@
             <div class="col-md-3">
               <ul class="list-unstyled">
                 <li>
-                  <a href="#" onclick="$('#video1').show(); $(video2).hide(); $(video3).hide();"><b>Acerca del Proyecto</b></a>
+                  <a href="#" onclick="$('#video1').hide(); $(video2).show(); $(video3).hide(); $(video4).hide(); $(video5).hide(); $(video6).hide(); $(video7).hide(); $(video8).hide();"><b>Acerca del Proyecto</b></a>
                   <a href="/acerca_del_proyecto/" class="color-orange glyphicon glyphicon-arrow-right"></a>
                 </li>
                 <li>
-                  <a href="#" onclick="$('#video2').show(); $(video1).hide(); $(video3).hide();"><b>Cómo funciona</b></a>
+                  <a href="#" onclick="$('#video1').hide(); $(video2).hide(); $(video3).show(); $(video4).hide(); $(video5).hide(); $(video6).hide(); $(video7).hide(); $(video8).hide();"><b>Cómo funciona</b></a>
                   <a href="/como_funciona/" class="color-orange glyphicon glyphicon-arrow-right"></a>
                 </li>
                 <li>
-                  <a href="#" onclick="$('#video2').hide(); $(video1).hide(); $(video3).show();"><b>Diccionario Multimedia</b></a>
+                  <a href="#" onclick="$('#video1').hide(); $(video2).hide(); $(video3).hide(); $(video4).show(); $(video5).hide(); $(video6).hide(); $(video7).hide(); $(video8).hide();"><b>Diccionario Multimedia</b></a>
                   {% if request.session.user_type == '01' %}
                     <a href="/configuracion_manual/01" class="color-orange glyphicon glyphicon-arrow-right"></a>
                   {% else %}
@@ -141,27 +161,27 @@
 
             <div class="col-md-3">
               <ul class="list-unstyled">
-                {% if request.session.user_type == '01' %}
+                {% if request.session.user_type == '01' %}             
                   <li>
-                    <a href="#"><b>Subir video</b></a>
+                    <a href="#" onclick="$('#video1').hide(); $(video2).hide(); $(video3).hide(); $(video4).hide(); $(video5).show(); $(video6).hide(); $(video7).hide(); $(video8).hide();"><b>Subir video</b></a>
                     <a href="/subir_video/" class="color-orange glyphicon glyphicon-arrow-right"></a>
                   </li>
                   <li>
-                    <a href="#"><b>Completar Desafío</b></a>
+                    <a href="#" onclick="$('#video1').hide(); $(video2).hide(); $(video3).hide(); $(video4).hide(); $(video5).hide(); $(video6).hide(); $(video7).hide(); $(video8).show();"><b>Completar Desafío</b></a>
                     <a href="/desafio/" class="color-orange glyphicon glyphicon-arrow-right"></a>
                   </li>
                 {%elif request.session.user_type == '02' %}                   
                   <li>
-                    <a href="#"><b>Subir definición</b></a>
+                    <a href="#" onclick="$('#video1').hide(); $(video2).hide(); $(video3).hide(); $(video4).hide(); $(video5).hide(); $(video6).show(); $(video7).hide(); $(video8).hide();"><b>Subir definición</b></a>
                     <a href="/subir_definicion/" class="color-orange glyphicon glyphicon-arrow-right"></a>
                   </li>
                   <li>
-                    <a href="#"><b>Completar Desafío</b></a>
+                    <a href="#" onclick="$('#video1').hide(); $(video2).hide(); $(video3).hide(); $(video4).hide(); $(video5).hide(); $(video6).hide(); $(video7).hide(); $(video8).show();"><b>Completar Desafío</b></a>
                     <a href="/desafio/" class="color-orange glyphicon glyphicon-arrow-right"></a>
                   </li>
                 {% elif request.session.user_type == '03' %}  
                   <li>
-                    <a href="#"><b>Validar archivos</b></a>
+                    <a href="#" onclick="$('#video1').hide(); $(video2).hide(); $(video3).hide(); $(video4).hide(); $(video5).hide(); $(video6).hide(); $(video7).show(); $(video8).hide();"><b>Validar archivos</b></a>
                     <a href="/listado_archivos/" class="color-orange glyphicon glyphicon-arrow-right"></a>
                   </li>
                 {% endif %}  
@@ -233,7 +253,10 @@
           <div class="row">
 
             <div class="col-md-6">
-              <h4 class="no-margin-top">Video</h4>
+              <p></p>
+              <video class="center" width="400" controls>
+                <source src="{% static 'videos/Video17.mp4' %}" type="video/mp4">
+              </video>
             </div>
 
             <div class="col-md-6">
