@@ -127,7 +127,7 @@
 }
 
 .definition{
-    padding-top: 10px;
+    padding-top: 8px;
     text-align: center;
 }
 
@@ -192,10 +192,10 @@ body{
     border: 1px solid #FFF; 
 }
 
-.bg-black{
-    background-color: #000;
-    color: #FFF;
-    border: 1px solid #FFF;
+.bg-white-error{
+    background-color: #FFF;
+    color: #000;
+    border: 1px solid #FFF; 
 }
 
 @media (min-width: 768px){
@@ -204,9 +204,9 @@ body{
       max-height: 500px;
       overflow: auto;
     }
-    .bg-black{
-      min-height: 500px;
-      max-height: 500px;
+    .bg-white-error{
+      min-height: 483px;
+      max-height: 483px;
     }
 }
 

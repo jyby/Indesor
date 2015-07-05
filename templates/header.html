@@ -127,18 +127,18 @@
               </video>
 
               <script type="text/JavaScript">
-              $('#video2').hide();
-              $('#video3').hide();
-              $('#video4').hide();
-              $('#video5').hide();
-              $('#video6').hide();
-              $('#video7').hide();
-              $('#video8').hide();                          
+                $('#video2').hide();
+                $('#video3').hide();
+                $('#video4').hide();
+                $('#video5').hide();
+                $('#video6').hide();
+                $('#video7').hide();
+                $('#video8').hide();                          
               </script>
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" style="padding-right: 0px">
               <ul class="list-unstyled">
                 <li>
                   <a href="#" onclick="$('#video1').hide(); $(video2).show(); $(video3).hide(); $(video4).hide(); $(video5).hide(); $(video6).hide(); $(video7).hide(); $(video8).hide();"><b>Acerca del Proyecto</b></a>
@@ -253,7 +253,6 @@
           <div class="row">
 
             <div class="col-md-6">
-              <p></p>
               <video class="center" width="400" controls>
                 <source src="{% static 'videos/Video17.mp4' %}" type="video/mp4">
               </video>
@@ -261,10 +260,10 @@
 
             <div class="col-md-6">
               <ul class="list-unstyled">
-                <li>{{request.session.credit}} <i class="fa fa-thumbs-up header-icon"></i> 
-                </li>
+                <li><span id="credit_profile_span"><b>{{request.session.credit}}</b></span> <i class="fa fa-thumbs-up header-icon"></i>
+                </li>          
                 <li>
-                  <a href="#">Modificar contraseña</a>
+                  <a href="#"><b>Modificar contraseña</b></a>
                   <a href="/modificar_contrasena/" class="color-orange glyphicon glyphicon-arrow-right"></a>
                 </li>
               </ul>

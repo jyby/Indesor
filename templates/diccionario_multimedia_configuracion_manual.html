@@ -49,6 +49,11 @@
 
             <aside class="widget">
               <h5 class="widget-title"><span>Buscar</span></h5>
+
+              {% if query%}
+              <h6>Usted está buscando "<b>{{query}}</b>"</h6>
+              {% endif %}
+
               <form class="searchform" method="GET" action="/configuracion_manual/{{manual_configuration}}/">
               {% csrf_token %}
                 <div class="form-group">
@@ -150,6 +155,7 @@
             if(data.status == "ok"){
               $("#"+word).addClass("active");
               $("#credit_span").html(data.credit);
+              $("#credit_profile_span").html(data.credit);
             }
             else{
               $("#no-credit").addClass("active");

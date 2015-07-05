@@ -20,19 +20,25 @@
           <div class="col-xs-12 bg-white padding-top-30">
 
             <div class="row row-files-validation">
+              <div class="col-xs-12">
+                <b>Palabra:</b> {{word_data.name}}
+              </div>
+
+              <div id="non_editable">
                 <div class="col-xs-12">
-                  <div class="col-xs-12">
-                    <b>Palabra:</b> {{word_data.name}}
-                  </div>
+                  <b>Definición:</b> {{word_data.definition}}
                 </div>
-                <div id="non_editable">
-                  <div class="col-xs-12">
-                    <b>Definición:</b> {{word_data.definition}}
-                  </div>
-                  <div class="col-xs-12">
-                    <b>Configuración manual: </b><a style="font-size: 25px"><span class="icon icon-{{icon_code}}"></span></a>
-                  </div>
+                <div class="col-xs-12">
+                  <b>Configuración manual: </b><a style="font-size: 25px"><span class="icon icon-{{icon_code}}"></span></a>
                 </div>
+                <div class="col-xs-12">
+                  {% for video in word_data.files %}
+                    <video class="center margin-top-10" width="300" controls>
+                      <source src="{{video}}" type="video/mp4">
+                    </video>
+                  {% endfor %}
+                </div>
+              </div>  
 
               <div id="editable" style="display:none">
                 <form method="POST" role="form" id="register_form" action="/modificar_palabra/" novalidate>
@@ -198,23 +204,33 @@
                       </div>
                       <div class="radio col-xs-7 margin-top-10">
                         <label><input type="radio" name="mc_radio" id="49" value="49"><i class="icon icon-e1 medium"></i></label>
-                      </div>                                                                                
+                      </div>               
                       <div class="clearfix"></div>
                     </div>
 
+                    <div class="col-xs-12">
+                      {% for video in word_data.files %}
+                        {% if forloop.last and word_data.files|length > 1%}
+                          <video class="center margin-top-10" style="margin-bottom: 0px" width="300" controls>
+                            <source src="{{video}}" type="video/mp4">
+                          </video>                         
+                          <form action="">
+                          <input type="checkbox" name="delete"> Eliminar
+                          </form>                        
+                        {% else %}
+                          <video class="center margin-top-10" width="300" controls>
+                            <source src="{{video}}" type="video/mp4">
+                          </video>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
                   </div>
+
                   <div class="col-xs-12">
-                    <input class="btn btn-warning margin-btn" type="submit" value="Guardar"></input>
+                    <button type="submit" class="btn btn-success margin-btn"><i class="glyphicon glyphicon-ok"></i> Aceptar</button>
+                    <a class="btn btn-danger margin-btn" href="/validar_archivo/?palabra={{word_data.name}}"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
                   </div>                 
                 </form>
-              </div>
-
-              <div class="col-xs-12">
-                {% for video in word_data.files %}
-                  <video class="center margin-top-10" width="300" controls>
-                    <source src="{{video}}" type="video/mp4">
-                  </video>
-                {% endfor %}
               </div>
             
               <div class="col-xs-12 col-sm-6">
@@ -230,13 +246,13 @@
                 Porcentaje votos negativos: {{word_data.negative_percentage}}%
               </div>
               <div class="col-xs-4">
-                <a href="/validar_palabra/?palabra={{word_data.name}}&respuesta=Aceptar" class="btn btn-success margin-btn"><span class="glyphicon glyphicon-ok"></span> Aceptar</a>
+                <a id="accept" href="/validar_palabra/?palabra={{word_data.name}}&respuesta=Aceptar" class="btn btn-success margin-btn"><span class="glyphicon glyphicon-ok"></span> Aceptar palabra</a>
               </div>
               <div class="col-xs-4">
                 <button id="edit" class="btn btn-warning margin-btn"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
               </div>      
               <div class="col-xs-4">
-                <a href="/validar_palabra/?palabra={{word_data.name}}&respuesta=Rechazar" class="btn btn-danger margin-btn"><span class="glyphicon glyphicon-remove"></span> Rechazar</a>
+                <a id="reject" href="/validar_palabra/?palabra={{word_data.name}}&respuesta=Rechazar" class="btn btn-danger margin-btn"><span class="glyphicon glyphicon-remove"></span> Rechazar palabra</a>
               </div>
             </div>
 
@@ -253,6 +269,8 @@
       $("#edit").on("click",function(e){
         $("#edit").hide();
         $("#non_editable").hide();
+        $("#accept").hide();
+        $("#reject").hide();        
         $("#editable").show();
       });
 

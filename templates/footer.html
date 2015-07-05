@@ -1,5 +1,6 @@
- {% load staticfiles %}
- {% include 'imports.html' %}
+<!doctype html>
+{% load staticfiles %}
+
 
 <!-- ================== FOOTER ==================================== -->
     <footer class="footer">
@@ -17,11 +18,12 @@
     <script src="{% static 'js/bootstrap.min.js'%}"></script>
     <script src="{% static 'js/jquery.bootstrap.addon.js' %}"></script>
     <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'js/modernizr.2.8.3.js'%}"></script>
     <script src="{% static 'js/jquery.slick-slider.min.js' %}"></script>
     <script src="{% static 'js/jquery.isotope.masonry.js' %}"></script>
-    <script src="{% static 'switcher/switcher.js' %}"></script> 
     <script src="{% static 'js/jquery.main.js' %}"></script>     
     <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'switcher/switcher.js' %}"></script>
 
     <script type="text/javascript">
     $("#login_form").validate({

@@ -13,6 +13,13 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Static files (CSS, JavaScript, Images)
+STATICFILES_DIRS = (
+    os.path.join(SITE_ROOT,'static_root','static'),
+)
+
+STATIC_URL = '/static/'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -81,15 +88,3 @@ TEMPLATE_DIRS = (
     os.path.join(SITE_ROOT,'templates'),
     os.path.join(BASE_DIR, 'static',  'templates'),
 )
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-STATICFILES_DIRS = (
-    os.path.join(SITE_ROOT,'static_root','static'),
-)
-
-STATIC_URL = '/static/'
-
-MEDIA_ROOT = os.path.normpath(os.path.join(SITE_ROOT,'upload/'))
-MEDIA_URL = '/upload/'
