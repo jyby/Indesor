@@ -53,7 +53,6 @@ def create_user(request):
 		return render_to_response('registrar_usuario.html', locals(), context_instance=RequestContext(request),)
 
 
-
 def login(request):
 	params = {
 		'username': request.POST['username'],
@@ -87,7 +86,36 @@ def logout(request):
 
 
 def change_password(request):
-	return render_to_response('modificar_contraseña.html', locals(), context_instance=RequestContext(request))
+	if request.method == 'GET':
+		return render_to_response('modificar_contraseña.html', locals(), context_instance=RequestContext(request))
+
+	elif request.method == 'POST':
+		try:		
+			password = request.POST['password']
+			new_password = request.POST['new_password']
+
+			params = {
+				'password': password,
+				'new_password': new_password,
+				'username' : request.session["username"]
+			}
+
+			r = requests.post('http://localhost:8000/api/v1.0/users/change_password/', data=params)
+
+			status = r.json()['status']
+
+			if status == 'ok':
+				result = "Su contraseña se ha modificado correctamente."
+
+			else:
+				result = "No ha ingresado correctamente su contraseña actual."
+
+			return render_to_response('modificar_contraseña.html', locals(), context_instance=RequestContext(request),)
+
+		except:
+			status = "error"
+			result = "Complete el formulario para modificar su contraseña."
+			return render_to_response('modificar_contraseña.html', locals(), context_instance=RequestContext(request),)
 
 
 def get_words(request, letra):
@@ -290,7 +318,6 @@ def upload_definition(request):
 		return render_to_response('subir_definicion.html', locals(), context_instance=RequestContext(request),)
 
 	elif request.method == 'POST':
-
 		try:		
 			word_name = request.POST['word']
 			word_definition = request.POST['definition']
@@ -322,7 +349,6 @@ def upload_definition(request):
 			status = "error"
 			result = "Complete el formulario para subir una definición."
 			return render_to_response('subir_definicion.html', locals(), context_instance=RequestContext(request),)
-
 
 
 def files_to_validate(request):

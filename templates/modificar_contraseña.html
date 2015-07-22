@@ -23,7 +23,21 @@
             </video>
           </div>
           <div class="col-xs-12 col-sm-6 bg-white padding-top-30">
-            <form role="form" action="/subir_video/" method="POST" enctype="multipart/form-data">            
+
+            {% if status == "ok" %}
+              <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{result}}
+              </div>
+            {% elif status == "error" %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{result}}
+              </div>
+            {% endif %}
+
+            <form id="pass_form" role="form" action="/modificar_contrasena/" method="POST">
+            {% csrf_token %}           
               <div class="form-group">
                 <label>Contraseña actual:</label>
                   <input type="password" id="password" name="password" class="form-control form-control-lg">
@@ -49,6 +63,45 @@
     <!--================== END #page ================================== -->
 
     {% include 'footer.html' %}
+   <script type="text/javascript">
+    $("#pass_form").validate({
+      rules: {
+        password: {
+          required: true
+        },
 
+        new_password: {
+          required: true
+        },
+
+        new_password_repetition: {
+          required: true,
+          equalTo: "#new_password"
+        }
+
+      },
+
+      messages: {
+        password: {
+          required: 'Ingrese su contraseña actual.'
+        },
+
+        new_password: {
+          required: 'Ingrese una nueva contraseña.'
+        },
+
+        new_password_repetition: {
+          required: 'Ingrese nuevamente su nueva contraseña.',
+          equalTo: 'Por favor ingrese una contraseña igual a la anterior.'
+        }              
+
+      },
+
+      errorPlacement: function(error, element){
+        error.insertAfter(element.parent());
+      }
+
+    });
+    </script>   
   </body>
 </html>
