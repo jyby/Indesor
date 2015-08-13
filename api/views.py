@@ -124,7 +124,10 @@ def get_words(request, letra):
 
 	letra = letra.upper()
 
-	r = requests.get('http://localhost:8000/api/v1.0/get_words/?character=' + letra)
+	username = request.session["username"]
+	password = request.session["password"]
+
+	r = requests.get('http://localhost:8000/api/v1.0/get_words/?character=' + letra + '&username=' + username + '&password=' + password)
 
 	if r.json()['status'] == 'error':
 		list_of_words = []
@@ -162,8 +165,11 @@ def get_words(request, letra):
 def get_words_manual_config(request, manual_configuration):
 	if 'username' not in request.session:
 		return HttpResponseRedirect('/error/')
+
+	username = request.session["username"]
+	password = request.session["password"]		
 			
-	r = requests.get('http://localhost:8000/api/v1.0/get_manual_config/?manual_configuration=' + manual_configuration)
+	r = requests.get('http://localhost:8000/api/v1.0/get_manual_config/?manual_configuration=' + manual_configuration + '&username=' + username + '&password=' + password)
 
 	if r.json()['status'] == 'error':
 		list_of_words = []
@@ -428,6 +434,18 @@ def validate_word(request):
 
 
 def modify_word(request):
+
+	try:
+		delete = request.POST['delete']
+
+		params = {
+		'word_name': request.POST['name'],
+		'username' : request.session["username"],
+		'password' : request.session["password"]		
+		}
+		d = requests.post('http://localhost:8000/api/v1.0/word/delete_last_file/', data=params)
+	except:
+		delete = None
 
 	params = {
 	'name': request.POST['name'],

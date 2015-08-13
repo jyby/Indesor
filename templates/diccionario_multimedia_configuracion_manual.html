@@ -19,7 +19,7 @@
           <div class="col-xs-11">
             <div class="row">
 
-              {% for number,icon in manual_config_pair_array%}
+              {% for number,icon in manual_config_pair_array %}
               <div class="letters
               {% ifequal number manual_configuration %}
                 letter-selected
@@ -79,7 +79,11 @@
                 {% endif %}
 
                 {% for word in words %}
-                    <li class="scroll-tabs"><a class="clase_ajax" href="#{{word.name}}" role="tab" data-toggle="tab">{{ word.name }}</a></li>
+                    <li class="scroll-tabs"><a class="clase_ajax" href="{{word.name}}" role="tab" data-toggle="tab">
+                    {% if word.paid = False %}
+                      <span class="glyphicon glyphicon-usd pull-left" style="top:4px"></span>
+                    {% endif %}
+                    {{ word.name }}</a></li>
                 {% endfor %}
 
                 {% if words.has_next %}
@@ -143,8 +147,9 @@
 
     <script type="text/javascript">
       $(".clase_ajax").on("click",function(e){
-        //e.preventDefault();
-        word = $(this).html();
+
+        word = $(this).attr("href");
+        element = $(this);
 
         $.ajax({
           url: "/pagar_por_palabra/",
@@ -156,6 +161,7 @@
               $("#"+word).addClass("active");
               $("#credit_span").html(data.credit);
               $("#credit_profile_span").html(data.credit);
+              element.html(word);
             }
             else{
               $("#no-credit").addClass("active");
@@ -170,6 +176,10 @@
             window.location = $(this).attr('href');
           });
 
+    $(".letters").on("click",function(){
+        link = $(this).children();
+        window.location = link.attr('href');
+    });
 
     </script>
   </body>

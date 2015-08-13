@@ -61,7 +61,7 @@
             <aside class="widget">
               <h5 class="widget-title"><span>Buscar</span></h5>
 
-              {% if query%}
+              {% if query %}
               <h6>Usted está buscando "<b>{{query}}</b>"</h6>
               {% endif %}
 
@@ -90,7 +90,12 @@
                 {% endif %}
 
                 {% for word in words %}
-                  <li class="scroll-tabs"><a class="clase_ajax" href="#{{word.name}}" role="tab" data-toggle="tab">{{word.name}}</a></li>
+
+                    <li class="scroll-tabs"><a class="clase_ajax" href="{{word.name}}" role="tab" data-toggle="tab">
+                    {% if word.paid = False %}
+                      <span class="glyphicon glyphicon-usd pull-left" style="top:4px"></span>
+                    {% endif %}
+                    {{word.name}}</a></li>
                 {% endfor %}
 
                 {% if words.has_next %}
@@ -154,8 +159,9 @@
 
     <script type="text/javascript">
       $(".clase_ajax").on("click",function(e){
-        //e.preventDefault();
-        word = $(this).html();
+
+        word = $(this).attr("href");
+        element = $(this);
 
         $.ajax({
           url: "/pagar_por_palabra/",
@@ -167,6 +173,7 @@
               $("#"+word).addClass("active");
               $("#credit_span").html(data.credit);
               $("#credit_profile_span").html(data.credit);
+              element.html(word);
             }
             else{
               $("#no-credit").addClass("active");
@@ -180,6 +187,11 @@
             e.preventDefault();
             window.location = $(this).attr('href');
           });
+
+    $(".letters").on("click",function(){
+        link = $(this).children();
+        window.location = link.attr('href');
+    });
 
     </script>
 

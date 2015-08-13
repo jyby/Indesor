@@ -57,154 +57,20 @@
                     </div>
                     
                     <div class="col-xs-12">
- 
-                      <div class="radio col-xs-7">
-                        <label><input type="radio" name="mc_radio" id="01" value="01" checked="checked"><i class="icon icon-b1 medium"></i></label>
+
+                      {% for number,icon in manual_config_pair_array %}
+                      <div class="radio col-xs-7
+                        {% if not forloop.first %}
+                          margin-top-10
+                        {% endif %}
+                      ">
+                        <label><input type="radio" name="mc_radio" id="{{number}}" value="{{number}}"
+                        {% if icon == icon_code %}
+                          checked="checked" 
+                        {% endif %}
+                        ><i class="icon icon-{{icon}} medium"></i></label>
                       </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="02" value="02"><i class="icon icon-b2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="03" value="03"><i class="icon icon-b3 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="04" value="04"><i class="icon icon-b4 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="05" value="05"><i class="icon icon-b5 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="06" value="06"><i class="icon icon-a1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="07" value="07"><i class="icon icon-a2 medium"></i></label>
-                      </div>                  
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="08" value="08"><i class="icon icon-a3 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="09" value="09"><i class="icon icon-a4 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="10" value="10"><i class="icon icon-a5 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="11" value="11"><i class="icon icon-g1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="12" value="12"><i class="icon icon-g2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="13" value="13"><i class="icon icon-g3 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="14" value="14"><i class="icon icon-g4 medium"></i></label>
-                      </div>    
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="15" value="15"><i class="icon icon-g5 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="16" value="16"><i class="icon icon-c1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="17" value="17"><i class="icon icon-c2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="18" value="18"><i class="icon icon-51 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="19" value="19"><i class="icon icon-52 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="20" value="20"><i class="icon icon-53 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="21" value="21"><i class="icon icon-54 medium"></i></label>
-                      </div>    
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="22" value="22"><i class="icon icon-v1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="23" value="23"><i class="icon icon-v2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="24" value="24"><i class="icon icon-o1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="25" value="25"><i class="icon icon-o2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="26" value="26"><i class="icon icon-o3 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="27" value="27"><i class="icon icon-o4 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="28" value="28"><i class="icon icon-o5 medium"></i></label>
-                      </div>    
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="29" value="29"><i class="icon icon-f1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="30" value="30"><i class="icon icon-f2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="31" value="31"><i class="icon icon-x1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="32" value="32"><i class="icon icon-h1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="33" value="33"><i class="icon icon-h2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="34" value="34"><i class="icon icon-l1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="35" value="35"><i class="icon icon-y1 medium"></i></label>
-                      </div>    
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="36" value="36"><i class="icon icon-y2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="37" value="37"><i class="icon icon-y3 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="38" value="38"><i class="icon icon-y4 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="39" value="39"><i class="icon icon-y5 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="40" value="40"><i class="icon icon-aa1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="41" value="41"><i class="icon icon-aa2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="42" value="42"><i class="icon icon-k1 medium"></i></label>
-                      </div>    
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="43" value="43"><i class="icon icon-i1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="44" value="44"><i class="icon icon-r1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="45" value="45"><i class="icon icon-r2 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="46" value="46"><i class="icon icon-w1 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="47" value="47"><i class="icon icon-31 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="48" value="49"><i class="icon icon-32 medium"></i></label>
-                      </div>
-                      <div class="radio col-xs-7 margin-top-10">
-                        <label><input type="radio" name="mc_radio" id="49" value="49"><i class="icon icon-e1 medium"></i></label>
-                      </div>               
+                      {% endfor %}
                       <div class="clearfix"></div>
                     </div>
 
@@ -214,9 +80,9 @@
                           <video class="center margin-top-10" style="margin-bottom: 0px" width="300" controls>
                             <source src="{{video}}" type="video/mp4">
                           </video>                         
-                          <form action="">
-                          <input type="checkbox" name="delete"> Eliminar
-                          </form>                        
+
+                          <input type="checkbox" name="delete" value="delete"> Eliminar
+                      
                         {% else %}
                           <video class="center margin-top-10" width="300" controls>
                             <source src="{{video}}" type="video/mp4">
